@@ -1,12 +1,12 @@
+.. include:: glossaries.rst
 .. |nbsp| unicode:: U+00A0 .. non-breaking space
 
 .. _api-provider:
 
-Providers
-*********
+|provider| 
+***************
 
-A Provider abstracts a connection to the Ethereum blockchain, for issuing queries
-and sending signed state changing transactions.
+|provider| 是一个连接以太坊网络的抽象，用与查询以太坊网络状态或者发送更改状态的交易。
 
 The *EtherscanProvider* and *InfuraProvider* offer the ability to connect to public
 third-party providers without the need to run any Ethereum node yourself.
@@ -46,7 +46,7 @@ connect to both Etherscan and INFURA simultaneously:
 
 .. _provider-connect:
 
-Connecting to Ethereum
+连接以太坊网络
 ======================
 
 There are several methods to connect to the Ethereum network provided. If you are not
@@ -156,7 +156,7 @@ new :sup:`ethers . providers` . IpcProvider( path [ , network ] )
 
 -----
 
-Properties
+属性
 ==========
 
 All properties are immutable unless otherwise specified, and will reflect their
@@ -252,7 +252,7 @@ IpcProvider :sup:`( inherits from JsonRpcProvider )`
 
 .. _provider-network:
 
-Network
+网络
 =======
 
 :sup:`prototype` . getNetwork ( ) |nbsp| :sup:`=>` |nbsp| :sup:`Promise<Network>`
@@ -263,7 +263,7 @@ Network
 
 .. _provider-account:
 
-Account
+账号
 =======
 
 :sup:`prototype` . getBalance ( addressOrName [ , blockTag :sup:`= "latest"` ] ) |nbsp| :sup:`=>` |nbsp| :sup:`Promise<BigNumber>`
@@ -302,7 +302,7 @@ Account
 
 .. _provider-blockchain:
 
-Blockchain Status
+以太坊状态
 =================
 
 :sup:`prototype` . getBlockNumber ( ) |nbsp| :sup:`=>` |nbsp| :sup:`Promise<number>`
@@ -371,10 +371,10 @@ Blockchain Status
 
 .. _provider-ens:
 
-Ethereum Naming Service
+以太坊域名服务 ENS 
 =======================
 
-The `Ethereum Naming Service`_ (ENS) allows easy to remember and use names to be
+The `Ethereum Naming Service`_ (ENS：Ethereum Naming Service) allows easy to remember and use names to be
 assigned to Ethereum addresses. Any provider operation which takes an address
 may also take an ENS name.
 
@@ -410,7 +410,7 @@ for an address if it has been configured.
 
 .. _provider-calling:
 
-Contract Execution
+执行合约
 ==================
 
 These are relatively low-level calls. The :ref:`Contracts API <api-contract>` should
@@ -492,7 +492,7 @@ usually be used instead.
 
 .. _provider-contract:
 
-Contract State
+合约信息
 ==============
 
 :sup:`prototype` . getCode ( addressOrName ) |nbsp| :sup:`=>` |nbsp| :sup:`Promise<hex>`
@@ -570,7 +570,7 @@ Contract State
 
 .. _provider-events:
 
-Events
+事件
 ======
 
 These methods allow management of callbacks on certain events on the blockchain
@@ -597,7 +597,7 @@ and contracts. They are largely based on the `EventEmitter API`_.
     Begin scanning for events from *blockNumber*. By default, events begin at the
     block number that the provider began polling at.
 
-Event Types
+事件类型
 -----------
 
 "block"
@@ -645,7 +645,7 @@ an array of topics
 
 .. _waitForTransaction:
 
-Waiting for Transactions
+等待交易
 ------------------------
 
 :sup:`prototype` . waitForTransaction ( transactionHash ) |nbsp| :sup:`=>` |nbsp| :sup:`Promise<TransactionReceipt>`
@@ -716,8 +716,8 @@ Waiting for Transactions
 
 -----
 
-Objects and Types
-=================
+对象及类型（用于参数及返回值）
+==================================
 
 There are several common objects and types that are commonly used as input parameters or
 return types for various provider calls.
@@ -776,7 +776,7 @@ Block Responses
 
 .. _network:
 
-Network
+网络
 -------
 
 A network repsents various properties of a network, such as mainnet (i.e. "homestead") or
@@ -811,7 +811,7 @@ If a network does not have the ENS contract deployed to it, names cannot be reso
 
 .. _transaction-request:
 
-Transaction Requests
+交易请求
 --------------------
 
 Any property which accepts a number may also be specified as a :ref:`BigNumber <bignumber>`
@@ -840,7 +840,7 @@ which resolves to the expected type.
 
 .. _transaction-response:
 
-Transaction Response
+交易回复
 --------------------
 
 .. code-block:: javascript
@@ -888,7 +888,7 @@ Transaction Response
 
 .. _transaction-receipt:
 
-Transaction Receipts
+交易收据
 --------------------
 
 .. code-block:: javascript
@@ -931,8 +931,8 @@ Transaction Receipts
 
 .. _log:
 
-Log
----
+日志
+------
 
 .. code-block:: javascript
     :caption: *Example*
@@ -962,8 +962,8 @@ Log
 
 .. _filter:
 
-Filters
--------
+过滤器
+---------
 
 Filtering on topics supports a `somewhat complicated`_ specification, however,
 for the vast majority of filters, a single topic is usually sufficient (see the example below).
@@ -995,7 +995,7 @@ The *EtherscanProvider* currently only supports a single topic.
 
 -----
 
-Provider Specific Extra API Calls
+|provider| 额外的 API
 =================================
 
 .. _provider-etherscan-extra:

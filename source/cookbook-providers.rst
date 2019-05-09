@@ -1,5 +1,6 @@
-Providers
-*********
+.. include:: glossaries.rst
+|provider| 的使用
+******************
 
 The Ethereum eco-system provides many methods of interacting with the
 blockchain. In ethers.js we expose a Provider API that covers the
@@ -77,7 +78,7 @@ temporary instances of an Ethereum node for testing.
 
 -----
 
-Custom Provider
+定制 |provider|
 ===============
 
 This is a much more advanced topic, and most people should not need to work this

@@ -5,7 +5,7 @@ Some quick examples of using Accounts.
 
 -----
 
-Dump All JSON Wallet Balances (in current directory)
+获取当前目录下所有 keystore 文件账号余额
 ====================================================
 
 .. code-block:: javascript
@@ -43,7 +43,7 @@ Dump All JSON Wallet Balances (in current directory)
 
 -----
 
-Sweep an Account into Another
+转移所有资金到另一个账号
 =============================
 
 This will sweep **all** the funds from one account's *privateKey* and
@@ -92,8 +92,8 @@ place it in another account, *newAddress*.
 
 -----
 
-Coalesce Jaxx Wallets
-=====================
+合并 Jaxx Wallets 账号
+=========================
 
 The Jaxx Wallet (for iOS, Android, desktop, et cetera) uses HD wallets on Ethereum the
 same way as Bitcoin, which results in each transaction being received by a separate
@@ -122,7 +122,7 @@ This also results in paying multiple transaction fees (1 fee per account to merg
 
 -----
 
-Access Funds in a Mnemonic Phrase Wallet
+获取助记词钱包及金额
 ========================================
 
 @TODO: This is incomplete
@@ -150,7 +150,7 @@ Access Funds in a Mnemonic Phrase Wallet
 
 -----
 
-Random Mnemonic
+随机助记词
 ===============
 
 Often you may simply want a random mnemonic that is valid. It is important to
@@ -188,7 +188,7 @@ a method that correctly encodes this checksum.
 
 -----
 
-Get Transaction History
+获取交易记录
 =======================
 
 Unfortunately, transaction history is not something that is easy to get. It

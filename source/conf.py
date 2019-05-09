@@ -4,7 +4,7 @@
 # list see the documentation:
 # http://www.sphinx-doc.org/en/master/config
 
-import recommonmark
+# import recommonmark
 # from recommonmark.transform import AutoStructify
 
 
@@ -85,6 +85,7 @@ language = 'zh_CN'
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = []
 
+html_last_updated_fmt = '%Y/%b/%d'
 
 # -- Options for HTML output -------------------------------------------------
 

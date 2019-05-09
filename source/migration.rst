@@ -1,16 +1,16 @@
 .. _migration:
 
-Migration Guides
-****************
+迁移指南
+***************************
 
-Migrating from Web3 to ethers v4
+从Web3 到 ethers v4
 ================================
 
 Todo: This is coming soon.
 
 -----
 
-Migrating from ethers v3 to ethers v4
+从 ethers v3 升级到 ethers v4
 =====================================
 
 A lot of the functionality has remained the same, but there has been some
@@ -18,7 +18,7 @@ slight refactoring and improved paradigms.
 
 -----
 
-Constants
+常量变更
 ---------
 
 All constants have moved from the utils to the root ethers object.
@@ -35,7 +35,7 @@ All constants have moved from the utils to the root ethers object.
 
 -----
 
-Deploying Contracts
+合约部署变更
 -------------------
 
 Deploying contracts has undergone some significant change. The new API is more
@@ -141,8 +141,8 @@ required to populate databases and track status.
 
 -----
 
-Encrypted Wallets
------------------
+处理加密JSON 钱包文件变更
+----------------------------------
 
 .. code-block:: javascript
     :caption: *Checking JSON Wallets --- ethers v3*
@@ -168,8 +168,8 @@ Encrypted Wallets
 
 -----
 
-Events
-------
+监听事件方法变更
+-----------------
 
 Events now behave like a modern JavaScript Event Emitter, rather than a 1995
 web browser.
@@ -271,8 +271,8 @@ If there are multiple events with the same name:
 
 -----
 
-Fetching JSON
--------------
+获取JSON方法变更
+------------------
 
 The JSON fetching routine, since it was mostly used for Providers was
 on the Provider object in v3. In v4, it has moved to utils, since there
@@ -294,8 +294,8 @@ are other common cases where it may be useful.
 
 -----
 
-Interfaces
-----------
+抽象接口Interface变更
+-----------------------
 
 This has always been a fairly low-level API, and mostly available for
 framework developers and other tools that require quite specific access
@@ -394,8 +394,8 @@ complexity and size of your code should be reduced.
 
 -----
 
-Networks
---------
+获取网络Network方法变更
+----------------------
 
 .. code-block:: javascript
     :caption: *Getting Network Info - ethers v3*
@@ -419,7 +419,7 @@ Networks
 
 -----
 
-Parsing Transactions
+解析交易方法变更
 --------------------
 
 The transaction parsing was moved out of the Wallet and into its own class
@@ -437,8 +437,8 @@ in the utilities, along with a general serialization API.
 
 -----
 
-Custom Signer
--------------
+定制 |signer| 方法变更
+------------------------
 
 .. code-block:: javascript
     :caption: *Custome Signer --- ethers v3*
@@ -522,8 +522,8 @@ Custom Signer
 
 -----
 
-Default Provider
-----------------
+获取默认 |provider| 方法变更
+------------------------------
 
 .. code-block:: javascript
     :caption: *Default Provider --- ethers v3*
@@ -537,8 +537,8 @@ Default Provider
 
 -----
 
-Big Number
-----------
+Big Number变更
+----------------
 
 .. code-block:: javascript
     :caption: *isBigNumber --- ethers v3*
@@ -552,8 +552,8 @@ Big Number
 
 -----
 
-JsonRpcProvider
-----------------
+JsonRpcProvider变更
+-------------------------
 
 .. code-block:: javascript
     :caption: *Connecting --- ethers v3*
@@ -621,8 +621,8 @@ JsonRpcProvider
 
 -----
 
-Verifying Messages
-------------------
+验证 Messages 方法变更
+-----------------------------
 
 The message verification was moved from a static class on the Wallet to the
 utilities, along with a few other functions of the elliptic curve cryptographic
@@ -640,8 +640,8 @@ exposed.
 
 -----
 
-Waiting for Transactions
-------------------------
+等待交易方法变更
+-------------------------------
 
 In v3, the ``transaction.wait()`` returned a Promise which would resolve to the
 **TransactionResponse** once it is mined.

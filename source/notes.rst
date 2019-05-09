@@ -1,5 +1,5 @@
-Notes
-*****
+说明
+**********
 
 A few quick notes about some of the less obvious aspects of interacting with
 Ethereum in JavaScript.

@@ -1,6 +1,6 @@
 
-手册
-********
+使用示例手册
+*************************
 
 This is a small (but growing) collection of simple recipes to perform common tasks
 with the Ethereum blockchain and Ethereum accounts.

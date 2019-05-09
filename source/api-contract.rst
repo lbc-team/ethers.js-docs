@@ -1,3 +1,4 @@
+.. include:: glossaries.rst
 .. |nbsp| unicode:: U+00A0 .. non-breaking space
 
 .. _api-contract:
@@ -97,8 +98,8 @@ new :sup:`ethers` . ContractFactory ( abi , bytecode [ , signer ] )
     Create a **new instance** of the ContractFactory, connected to the new *signer*.
 
 
-Prototype
----------
+Prototype属性
+------------------
 
 :sup:`prototype` . bytecode
     The Contract executable byte code..
@@ -111,7 +112,7 @@ Prototype
     If this is null, ``deploy()`` cannot be called.
 
 
-Connecting
+关联地址
 ----------
 
 :sup:`prototype` . attach ( address ) |nbsp| :sup:`=>` |nbsp| :sup:`Contract`
@@ -119,7 +120,7 @@ Connecting
     Contract Interface and Signer.
 
 
-Deployment
+部署
 ----------
 
 :sup:`prototype` . deploy ( ... ) |nbsp| :sup:`=>` |nbsp| :sup:`Promise<Contract>`
@@ -235,13 +236,13 @@ Deployment
 
 -----
 
-Connecting to Existing Contracts
+连接已有合约
 =================================
 
 Once a Contract has been deployed, it can be connected to using
 the **Contract** object.
 
-Connecting to a Contract
+连接合约
 ------------------------
 
 new :sup:`ethers` . Contract ( addressOrName , abi , providerOrSigner )
@@ -345,8 +346,8 @@ new :sup:`ethers` . Contract ( addressOrName , abi , providerOrSigner )
 
 -----
 
-Prototype
----------
+Prototype属性
+---------------
 
 :sup:`prototype` . address
     The address (or ENS name) of the contract.
@@ -364,7 +365,7 @@ the ABI provided, see :ref:`Contract Meta-Class <contract-metaclass>`.
 
 -----
 
-Waiting for Deployment
+等待部署
 ----------------------
 
 :sup:`prototype` . deployed ( ) |nbsp| :sup:`=>` |nbsp| :sup:`Promise<Contract>`
@@ -379,14 +380,14 @@ Waiting for Deployment
 
 .. _contract-metaclass:
 
-Meta-Class Properties
+Meta-Class 属性
 =====================
 
 Since a Contract is dynamic and loaded at run-time, many of the properties
 that will exist on a Contract are determined at run-time from
 the :ref:`Contract ABI <contract-abi>`.
 
-Contract Methods
+合约方法
 ----------------
 
 All functions populated from the ABI are also included on the contract object
@@ -409,7 +410,7 @@ using ``contract.getValue()``.
     estimate the cost the provided parameters.
 
 
-Contract Event Filters
+合约事件过滤器
 ----------------------
 
 Filters allow for a flexible and efficient way to fetch only a subset of the
@@ -450,8 +451,8 @@ set of values. The ``null`` matches any value.
 
 .. _contract-overrides:
 
-Overrides
-=========
+override 指定交易附加信息
+==============================
 
 Every Contract method may take one additional (optional) parameter which specifies the
 transaction (or call) overrides.
@@ -581,8 +582,8 @@ Configuring Events
 
 .. _providers-vs-signers:
 
-Providers vs Signers
-====================
+用 Providers 还是 Signers
+===========================
 
 A Contract object has a notion of an "frame of reference", which will determine
 what type of access and whom the Contract is enacted upon as. This is specified
@@ -605,8 +606,8 @@ another account or provider, use the ``connect`` function.
     Create a **new instance** of the Contract object connected as *providerOrSigner*.
 
 
-Types
-=====
+类型在合约与 JavaScript 之间的转换
+========================================
 
 There are many variable types available in *Solidity*, some which convert
 to and from JavaScript gracefully, and others that do not. Here are some
@@ -704,7 +705,7 @@ either the named properties or by their indices, in which case both point to the
 
 .. _contract-filter:
 
-Filtering Events
+事件过滤
 ================
 
 On every contract, there is a ``filters`` property, which can be used to
@@ -727,7 +728,7 @@ of a contract.
 
 .. _contract-abi:
 
-Application Binary Interface (ABI)
+|ABI|
 ==================================
 
 Each Contract has a description of its interface, which describes each function

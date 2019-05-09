@@ -1,11 +1,11 @@
-合约Contracts
-**************
+合约 Contracts 的使用
+**************************
 
 Some quick examples for techniques with Contracts.
 
 -----
 
-Return a Value from a State-Changing Method
+获取状态变化后的值
 ===========================================
 
 Since a state-changing (non-constant) function can take a non-trivial
@@ -24,7 +24,7 @@ Using events, we can simulate a return value from a non-constant function.
 
         function increment() returns (uint256 sum) {
             _accum++;
-            Returns(_accum);
+            emit Returns(_accum);
         }
     }
 
@@ -85,7 +85,7 @@ Using events, we can simulate a return value from a non-constant function.
 
 -----
 
-Economic Incentives and Economic Value
+经济激励与经济价值
 ======================================
 
 A very important aspect of Smart Contracts is consideration of the

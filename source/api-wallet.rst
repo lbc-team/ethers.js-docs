@@ -1,12 +1,15 @@
+.. include:: glossaries.rst
 .. |nbsp| unicode:: U+00A0 .. non-breaking space
 
 .. _api-wallet:
 
-Wallets and Signers
-*******************
+在使用接口之前，需要先确保正确 `引入了 ethers.js <getting-started>`_ 。
+ 
 
-A **Wallet** manages a private/public key pair which is used to cryptographically sign
-transactions and prove ownership on the Ethereum network.
+|wallet| 类 和 |signer| 接口
+**************************************
+
+ |wallet| 类管理着一个公私钥对用于在以太坊网络上密码签名交易以及所有权证明。
 
 -----
 
@@ -15,13 +18,11 @@ transactions and prove ownership on the Ethereum network.
 Wallet
 ======
 
-The **Wallet** implements the :ref:`Signer API <signer>` and can be used anywhere a *Signer*
-is expected and has all the required properties.
+ **Wallet** 实现了 :ref:`Signer API <signer>` ，因此可以在任何需要 |signer| 的地方使用 **Wallet** ，它包含了 |signer| 所有的属性。
 
-|
 
-Creating Instances
-------------------
+创建 Wallet 实例
+----------------------
 
 new :sup:`Wallet` ( privateKey [ , provider ] )
     Creates a new instance from *privateKey* and optionally connect a provider
@@ -135,11 +136,20 @@ new :sup:`Wallet` ( privateKey [ , provider ] )
 
 -----
 
-Prototype
----------
+Prototype 属性
+------------------
 
 :sup:`prototype` . address
-    The public address of a wallet
+    获得 |wallet| 地址
+
+.. code-block:: javascript
+    :caption: *获取 Wallet address 属性*
+
+    let lbcWallet = ethers.Wallet.createRandom();
+    lbcWallet.address
+    // "0x863e27dbD608649d08c69F83ccA51b045721f318"
+    lbcWallet.privateKey
+    // "0x8bc2957edb0200357ddc30f681b5e5f235256e2812781f9b06415bbeb1e72b40"
 
 :sup:`prototype` . privateKey
     The private key of a wallet; keep this secret
@@ -162,7 +172,7 @@ Prototype
 
 -----
 
-Signing
+签名
 -------
 
 :sup:`prototype` . sign ( transaction ) |nbsp| :sup:`=>` |nbsp| :sup:`Promise<string>`
@@ -291,7 +301,7 @@ Signing
 
 -----
 
-Blockchain Operations
+与链交互
 ---------------------
 
 These operations require the wallet have a provider attached to it.
@@ -373,10 +383,10 @@ These operations require the wallet have a provider attached to it.
 
 -----
 
-Encrypted JSON Wallets
-----------------------
+处理加密的 JSON 钱包文件
+--------------------------------------------
 
-Many systems store private keys as encrypted JSON wallets, in various formats. There are several
+Many systems store private keys as encrypted JSON wallets (keystore), in various formats. There are several
 formats and algorithms that are used, all of which are supported to be read.
 Only the secure scrypt variation can be generated.
 
@@ -419,8 +429,8 @@ Wallet instance from a JSON wallet.
 
 .. _signer:
 
-Signer API
-==========
+|signer| 接口
+==================
 
 The Signer API is an abstract class which makes it easy to extend and add new signers,
 that can be used by this library and extension libraries. The :ref:`Wallet <wallet>`

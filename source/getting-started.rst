@@ -1,19 +1,19 @@
-快速入门
+开始使用
 ***************
 
-The ethers.js library is a compact and complete JavaScript library for Ethereum.
+ethers.js 库是为以太坊 提供的一个的小而完整的 JavaScript 库。
 
 -----
 
-Installing in Node.js
-=====================
+在 Node.js 项目中安装
+==========================
 
-Install the ethers.js library from your project directory::
+项目目录下安装 ethers.js 库::
 
     /home/ricmoo/my-project> npm install --save ethers
 
-Importing
----------
+导入ethers
+------------------
 
 .. code-block:: javascript
     :caption: *JavaScript (ES3)*
@@ -33,17 +33,15 @@ Importing
 
 -----
 
-Including in Web Applications
+在Web应用中引入ethers
 =============================
 
-For security purposes, it is usually best to place a **copy** of `this script`_ on
-the application's server, but for a quick prototype using the Ethers CDN (content
-distribution network) should suffice.
+出于安全考虑，通常最好复制一份 `ethers-v4.min.js`_  到自己的应用程序服务器，如果快速原型体验，使用Ethers CDN应该足够了。
 
 .. code-block:: html
     :caption: *HTML*
 
-    <!-- This exposes the library as a global variable: ethers -->
+    <!-- 会导出一个全局的变量: ethers -->
     <script src="https://cdn.ethers.io/scripts/ethers-v4.min.js"
             charset="utf-8"
             type="text/javascript">
@@ -53,4 +51,4 @@ distribution network) should suffice.
 -----
 
 .. _npm is installed: https://nodejs.org/en/
-.. _this script: https://cdn.ethers.io/scripts/ethers-v4.min.js
+.. _ethers-v4.min.js: https://cdn.ethers.io/scripts/ethers-v4.min.js

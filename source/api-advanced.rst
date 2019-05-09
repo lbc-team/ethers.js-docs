@@ -1,3 +1,4 @@
+.. include:: glossaries.rst
 .. |nbsp| unicode:: U+00A0 .. non-breaking space
 
 低级 API
@@ -11,17 +12,17 @@ but the emphasis at this point is documenting the more :ref:`common methods <api
 
 -----
 
-ABI Coder
-=========
+ABI编码器 AbiCoder
+=====================
 
-Creating Instances
+创建 AbiCoder
 ------------------
 
 new :sup:`ethers . utils` **. AbiCoder** ( [ coerceFunc ] )
     Create a new ABI Coder object, which calls *coerceFunc* for each parsed value
     during decoding. The *coerceFunc* should have the signature: ``function(type, value)``.
 
-Static Properties
+静态属性
 -----------------
 
 :sup:`ethers . utils` **. defaultAbiCoder**
@@ -29,8 +30,8 @@ Static Properties
     which will call ``toNumber()`` on BigNumbers whose **type** is less than
     53 bits and is safe for JavaScript Number instances.
 
-Prototype
----------
+Prototype属性
+----------------
 
 :sup:`prototype` . encode ( types , values ) |nbsp| :sup:`=>` |nbsp| :sup:`hex`
     Returns a :ref:`hex string <hexstring>` of the *values* encoded as the *types*.
@@ -46,8 +47,8 @@ Prototype
 
 .. _api-hdnode:
 
-HDNode
-======
+HDNode （分层推导）
+======================
 
 A *Hierarchical Deterministic Wallet* represents a large tree of private keys
 which can reliably be reproduced from an initial seed. Each node in the tree
@@ -60,7 +61,7 @@ non-hardened nodes.
 
 See the `BIP 39 Specification`_ to learn more about Mnemonic Phrases.
 
-Creating Instances
+创建HDNode实例
 ------------------
 
 :sup:`ethers . utils . HDNode` **. fromMnemonic** ( mnemonic ) |nbsp| :sup:`=>` |nbsp| :sup:`HDNode`
@@ -73,8 +74,8 @@ Creating Instances
     Create an HDNode from an extended private key (xpriv) or extended public key (xpub).
 
 
-Prototype
----------
+Prototype属性
+---------------
 
 :sup:`prototype` **. privateKey**
     The :ref:`hex string <hexstring>` private key for this node.
@@ -103,7 +104,7 @@ Prototype
     if the node has been neutered.
 
 
-Deriving Child and Neutered Nodes
+子节点及最终节点 推导
 ---------------------------------
 
 :sup:`prototype` **. derivePath** ( path ) |nbsp| :sup:`=>` |nbsp| :sup:`HDNode`
@@ -118,7 +119,7 @@ Deriving Child and Neutered Nodes
     derive an extended public key. See the BIP32 standard for more details.
 
 
-Static Methods
+静态方法
 --------------
 
 :sup:`ethers . utils . HDNode` **. mnemonicToEntropy** ( mnemonic ) |nbsp| :sup:`=>` |nbsp| :sup:`hex`
@@ -156,14 +157,14 @@ Static Methods
 
 .. _api-interface:
 
-Interface
-=========
+抽象接口对象 Interface
+========================
 
 The Interface Object is a meta-class that accepts a Solidity (or compatible)
 Application Binary Interface (ABI) and populates functions to deal with encoding
 and decoding the parameters to pass in and results returned.
 
-Creating an Instance
+创建Interface实例
 --------------------
 
 new :sup:`ethers . utils` . Interface ( abi )
@@ -172,8 +173,8 @@ new :sup:`ethers . utils` . Interface ( abi )
     Object.
 
 
-Prototype
----------
+Prototype属性
+-----------------
 
 :sup:`prototype` . abi
     A **copy** of the ABI is returned, modifying this object will not alter the ABI.
@@ -191,8 +192,8 @@ Prototype
     to a FunctionDescription.
 
 
-Parsing Objects
----------------
+解析（交易/日志）对象
+-----------------------
 
 :sup:`prototype` . parseTransaction ( transaction ) |nbsp| :sup:`=>` |nbsp| :sup:`TransactionDescription`
     Parse *transaction* and return a description of the call it represents.
@@ -201,7 +202,7 @@ Parsing Objects
     Parse *log* and return a description of the event logs it represents.
 
 
-Object Test Functions
+对象测试方法
 ---------------------
 
 :sup:`prototype` . isInterface ( value ) |nbsp| :sup:`=>` |nbsp| :sup:`boolean`
@@ -212,7 +213,7 @@ Object Test Functions
     value of *value* is the hash of the actual value.
 
 
-Descriptions
+描述
 ------------
 
 **Deploy Description**
@@ -283,21 +284,21 @@ Descriptions
 
 -----
 
-Provider (Sub-Classing)
+|provider| 及子类
 =======================
 
 See the :ref:`Provider API <api-provider>` for more common usage. This documentation
 is designed for developers that are sub-classing BaseProvider.
 
-Static Methods
+静态方法
 --------------
 
 :sup:`BaseProvider` . inherits ( childProvider ) |nbsp| :sup:`=>` |nbsp| :sup:`void`
     Set up *childProvider* as an provider, inheriting the parent prototype and
     set up a prototype.inherits on the *childProvider*.
 
-Prototype
----------
+Prototype属性
+------------------
 
 :sup:`prototype` . perform ( method , params ) |nbsp| :sup:`=>` |nbsp| :sup:`Promise<any>`
     The only method needed to override in a subclass. All values are sanitized
@@ -421,10 +422,10 @@ Prototype
 
 -----
 
-Recursive-Length Prefixed Encoding (RLP)
+递归长度前缀编码 (RLP)
 ========================================
 
-This encoding method is used internally for several aspects of Ethereum, such as
+Recursive-Length Prefixed Encoding，This encoding method is used internally for several aspects of Ethereum, such as
 encoding transactions and determining contract addresses. For most developers this
 should not be necessary to use.
 
@@ -434,7 +435,7 @@ Arrays.
 
 See: https://github.com/ethereum/wiki/wiki/RLP
 
-Static Methods
+静态方法
 --------------
 
 :sup:`ethers . utils . RLP` . encode( object ) |nbsp| :sup:`=>` |nbsp| :sup:`hex`
@@ -461,7 +462,7 @@ Static Methods
 -----
 
 Signing Key
-===========
+===============
 
 The SigningKey interface provides an abstraction around the
 *secp256k1 elliptic curve cryptography* library, which signs digests,
@@ -469,8 +470,8 @@ computes public keys from private keys and performs *ecrecover* which
 computes a public key from a digest and a signature.
 
 
-Creating Instances
-------------------
+创建 SigningKey 实例
+-----------------------
 
 new :sup:`ethers . utils` . SigningKey ( privateKey )
     Create a new SigningKey and compute the corresponding public key and address.
@@ -478,8 +479,8 @@ new :sup:`ethers . utils` . SigningKey ( privateKey )
     :ref:`Arrayish <arrayish>` representing 32 bytes.
 
 
-Prototype
----------
+Prototype属性
+------------------
 
 :sup:`prototype` . address
     The Ethereum checksum address for this key pair.
@@ -491,7 +492,7 @@ Prototype
     The uncompressed public key for the key pair.
 
 
-Cryptographic Operations
+加密操作
 ------------------------
 
 :sup:`prototype` . signDigest ( messageDigest ) |nbsp| :sup:`=>` |nbsp| :sup:`hex`

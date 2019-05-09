@@ -1,11 +1,11 @@
-Testing
+测试
 *******
 
 Some quick examples for techniques for testing.
 
 -----
 
-Contract Events
+合约事件
 ===============
 
 .. code-block:: javascript
@@ -44,7 +44,7 @@ Contract Events
 
 -----
 
-Using Multiple Accounts
+使用多个账号
 =======================
 
 .. code-block:: javascript

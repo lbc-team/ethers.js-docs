@@ -1,3 +1,4 @@
+.. include:: glossaries.rst
 .. |nbsp| unicode:: U+00A0 .. non-breaking space
 
 工具包
@@ -8,8 +9,8 @@ required to write dapps, process user input and format data.
 
 -----
 
-Addresses
-=========
+地址相关函数
+==================
 
 There are :ref:`several formats <checksum-address>` available to represent Ethereum
 addresses and various ways they are determined.
@@ -93,7 +94,7 @@ An arrayish object is used to describe binary data and has the following conditi
 
 .. _bignumber:
 
-Big Numbers
+大数处理
 ===========
 
 A BigNumber is an immutable object which allow accurate math operations
@@ -149,8 +150,8 @@ can safely handle. Also see: :ref:`Constants <constants>`
     Return a hexstring representation of the value.
 
 
-Creating Instances
-------------------
+创建 BigNumber 实例
+-----------------------
 
 :sup:`utils` . bigNumberify ( value ) |nbsp| :sup:`=>` |nbsp| :sup:`BigNumber`
     Returns a BigNumber instance of *value*. The *value* may be anything that can
@@ -183,8 +184,8 @@ Creating Instances
 
 .. _bytes32string:
 
-Bytes32 Strings
-===============
+Bytes32 字符串
+==================
 
 Often for short strings, it is far more efficient to store them as
 a fixed, null-terminated bytes32, instead of a dynamic length-prefixed
@@ -217,7 +218,7 @@ bytes.
 
 .. _constants:
 
-Constants
+常量
 =========
 
 :sup:`ethers . constants` . AddressZero
@@ -249,10 +250,10 @@ Constants
 
 -----
 
-Cryptographic Functions
+加解密相关方法
 =======================
 
-Elliptic Curve
+椭圆曲线
 --------------
 
 :sup:`utils` . computeAddress ( publicOrPrivateKey ) |nbsp| :sup:`=>` |nbsp| :sup:`Address`
@@ -285,7 +286,7 @@ Elliptic Curve
     console.log(signingAddress);
     // "0x14791697260E4c9A71f18484C9f997B308e59325"
 
-Hash Functions
+Hash 方法
 --------------
 
 :sup:`utils` . keccak256 ( hexStringOrArrayish ) |nbsp| :sup:`=>` |nbsp| :sup:`hex`
@@ -312,7 +313,7 @@ Hash Functions
     // '0xdf7e70e5021544f4834bbee64a9e3789febc4be81470df629cad6ddb03320a5c'
 
 
-Hash Function Helpers
+Hash 帮助方法 
 ---------------------
 
 :sup:`utils` . hashMessage ( stringOrArrayish ) |nbsp| :sup:`=>` |nbsp| :sup:`hex`
@@ -341,7 +342,7 @@ Hash Function Helpers
     console.log(utils.id("addr(bytes32)"));
     // '0x3b3b57de213591bb50e06975ea011e4c8c4b3e6de4009450c1a9e55f66e4bfa4'
 
-Key Derivation
+Key 衍生
 --------------
 
 :sup:`utils` . pbkdf2 ( password , salt , iterations , keylen , hashAlgorithm )
@@ -349,8 +350,8 @@ Key Derivation
     *length* using the *hashAlgorithm*. The supported hash algorithms are ``sha256``
     and ``sha512``.
 
-Random
-------
+随机数
+--------
 
 :sup:`utils` . randomBytes ( length ) |nbsp| :sup:`=>` |nbsp| :sup:`Uint8Array`
     Return a Uint8Array of cryptographically secure random bytes
@@ -409,7 +410,7 @@ the result of the hash functions as would be performed by Solidity.
 -----
 
 
-Ether Strings and Wei
+|Ether| 单位及转换
 =====================
 
 :sup:`utils` . etherSymbol
@@ -479,7 +480,7 @@ Ether Strings and Wei
 
 .. _hexstring:
 
-Hex Strings
+Hex 字符串
 ===========
 
 A hex string is **always** prefixed with "0x" and consists of the characters
@@ -529,7 +530,7 @@ Namehash
 
 .. _signature:
 
-Signatures
+签名
 ==========
 
 There are two common formats for signatures in Ethereum. The **flat-format**, which
@@ -588,7 +589,7 @@ the properties:
 
 .. _transactions:
 
-Transactions
+交易
 ============
 
 :sup:`utils` . serializeTransaction ( transaction [ , signature ] ) |nbsp| :sup:`=>` |nbsp| :sup:`hex`
@@ -620,7 +621,7 @@ Transactions
 
 .. _utf8-strings:
 
-UTF-8 Strings
+UTF-8 字符串
 =============
 
 .. _utf8-to-bytes:

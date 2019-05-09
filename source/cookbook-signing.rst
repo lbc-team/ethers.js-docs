@@ -1,4 +1,4 @@
-Signing Messages
+对消息签名
 ****************
 
 Signing messages can be used for various method of authentication and off-chain
@@ -6,7 +6,7 @@ operations, which can be put on-chain if necessary.
 
 -----
 
-Signing a String Message
+字符串签名
 ========================
 
 By allowing a user to sign a string, which can be verified on-chain, interesting
@@ -130,7 +130,7 @@ functionality by the caller.
 
 -----
 
-Signing a Digest Hash
+摘要哈希签名
 =====================
 
 Signing a digest can be far more space efficient than signing an arbitrary
