@@ -25,31 +25,27 @@ Wallet
 ----------------------
 
 new :sup:`Wallet` ( privateKey [ , provider ] )
-    Creates a new instance from *privateKey* and optionally connect a provider
+    从参数 *privateKey* 私钥创建一个钱包实例， 还可以提供一个可选的 |provider| 参数用于连接节点。 
 
 :sup:`Wallet` . createRandom ( [ options ] ) |nbsp| :sup:`=>` |nbsp| :sup:`Wallet`
-    Creates a new random wallet. Ensure this wallet is stored somewhere safe, if
-    lost there is **NO way to recover it**.
+    创建一个随机钱包实例。 确保钱包（私钥）存放在安全的位置，如果丢失了就**没有办法找回钱包**。
 
-    Options may have the properties:
+    额外的参数 options 为：
 
-        - **extraEntropy** --- additional entropy to stir into the random source
+        - **extraEntropy** --- 额外的熵加入随机源
 
 .. _fromEncryptedJson:
 
 :sup:`Wallet` . fromEncryptedJson ( json, password [ , progressCallback ] ) |nbsp| :sup:`=>` |nbsp| :sup:`Wallet`
-    Decrypt an encrypted Secret Storage `JSON Wallet`_ (from Geth, parity, Crowdsale
-    tools, or that was created using *prototype.encrypt* )
+    通过解密一个 `JSON 钱包文件`_ 创建钱包实例，JSON 钱包文件，即 keystore文件， 通常来自 Geth, parity, Crowdsale 等钱包或工具，或者通过钱包加密函数 *prototype.encrypt* 创建。
 
 :sup:`Wallet` . fromMnemonic ( mnemonic [ , path :sup:`= "m/44'/60'/0'/0/0"` [ , wordlist ] ] ) |nbsp| :sup:`=>` |nbsp| :sup:`Wallet`
-    Generate a `BIP-039`_ + `BIP-044`_ wallet from *mnemonic* deriving *path* using
-    the *wordlist*. The default language is English (en).
+    通过助记词（及路径）创建钱包实例，助记词及路径由 `BIP-039`_ 和 `BIP-044`_ 定义，默认使用英文助记词。
+    这里有一篇介绍 `BIP39及BIP44非常棒的文章 <https://learnblockchain.cn/2018/09/28/hdwallet/>`_ ，如果不了解 BIP39 及 BIP44 可以读一读。
 
-    In the browserified ``dist/ethers.min.js`` only the English wordlist is
-    available. Each additional wordlist may be included by adding a ``<script>``
-    for the ``dist/wordlist-*.js``
+    注意压缩过的 min版本 ``dist/ethers.min.js`` 仅支持英文版本， 其他语言的支持可以通过添加 ``<script>`` 来加入各语言的 ``dist/wordlist-*.js``
 
-    The current supported wordlists are:
+    当前支持的单词语言列表：
 
     ===================== =========================== =======================
     Language              node.js                     Browser
@@ -65,14 +61,14 @@ new :sup:`Wallet` ( privateKey [ , provider ] )
 .. _wallet-connect:
 
 :sup:`prototype` . connect ( provider ) |nbsp| :sup:`=>` |nbsp| :sup:`Wallet`
-    Creates a new Wallet instance from an existing instance, connected to a new *provider*.
+    从已有实例创建新的Wallet实例，并连接到新 |provider| 
 
 |
 
 |
 
 .. code-block:: javascript
-    :caption: *load a private key*
+    :caption: *加载私钥y*
 
     let privateKey = "0x0123456789012345678901234567890123456789012345678901234567890123";
     let wallet = new ethers.Wallet(privateKey);
@@ -82,13 +78,13 @@ new :sup:`Wallet` ( privateKey [ , provider ] )
     let walletWithProvider = new ethers.Wallet(privateKey, provider);
 
 .. code-block:: javascript
-    :caption: *create a new random account*
+    :caption: *创建一个随机钱包实例*
 
     let randomWallet = ethers.Wallet.createRandom();
 
 
 .. code-block:: javascript
-    :caption: *load a JSON wallet*
+    :caption: *加载JSON钱包文件*
 
     let data = {
         id: "fb1280c0-d646-4e40-9550-7026b1be504a",
@@ -122,7 +118,7 @@ new :sup:`Wallet` ( privateKey [ , provider ] )
 
 
 .. code-block:: javascript
-    :caption: *load a mnemonic phrase*
+    :caption: *加载助记词*
 
     let mnemonic = "radar blur cabbage chef fix engine embark joy scheme fiction master release";
     let mnemonicWallet = ethers.Wallet.fromMnemonic(mnemonic);
@@ -152,37 +148,33 @@ Prototype 属性
     // "0x8bc2957edb0200357ddc30f681b5e5f235256e2812781f9b06415bbeb1e72b40"
 
 :sup:`prototype` . privateKey
-    The private key of a wallet; keep this secret
+    钱包的私钥; 注意保密。
 
 :sup:`prototype` . provider
-    A connected :ref:`Provider <provider>` which allows the wallet to
-    connect to the Ethereum network to query its state and send transactions,
-    or null if no provider is connected.
+    返回连接的 :ref:`Provider <provider>` 它允许钱包连接到以太坊网络以查询其状态并发送交易，
+    如果没有连接提供者，则返回null。
 
-    To change the provider, use the :ref:`connect <wallet-connect>` method, which will return
-    a **new instance** of the Wallet connected to the provider.
-
+    要更改 |provider| ，请使用 :ref:`connect <wallet-connect>` 方法，该方法将返回连接到新的 |provider| 的钱包 **实例** 。
     
 
 :sup:`prototype` . mnemonic
-    The mnemonic phrase for this wallet, or null if the mnemonic is unknown.
+   返回钱包的助记词，如果没有助记词，则为null。
+
 
 :sup:`prototype` . path
-    The mnemonic path for this wallet, or null if the mnemonic is unknown.
+    返回此钱包的助记词上的路径，如果没有助记词，则为null。
 
 -----
 
-签名
--------
+签名方法
+----------
 
 :sup:`prototype` . sign ( transaction ) |nbsp| :sup:`=>` |nbsp| :sup:`Promise<string>`
-    Signs *transaction* and returns a :ref:`Promise <promise>` that resolves to
-    the signed transaction as a :ref:`hex string <hexstring>`.
+    对**交易**签名返回一个 :ref:`Promise <promise>` ，从Promise中可以获取一个签名后的交易hash :ref:`16进制字符串 <hexstring>`
 
-    In general, the `sendTransaction`_ method is preferred to ``sign``, as it can automatically
-    populate values asynchronously.
+    通常应该使用 `sendTransaction`_ 而不是 ``sign``, 因为它可以异步执行。
 
-    The properties for transaction are all optional and include:
+    交易的属性（字段）都是可选的，包括：
 
         - **to**
         - **gasLimit**
@@ -193,14 +185,12 @@ Prototype 属性
         - **chainId**
 
 :sup:`prototype` . signMessage ( message ) |nbsp| :sup:`=>` |nbsp| :sup:`Promise<string>`
-    Signs *message* and returns a :ref:`Promise <promise>` that resolves to
-    the :ref:`flat-format <signature>` signature.
+    对 *message* 签名返回 :ref:`Promise <promise>` ，从中可以获取 :ref:`flat-format <signature>` 的签名信息。
 
-    If *message* is a string, it is converted to UTF-8 bytes, otherwise it is
-    preserved as a binary representation of the :ref:`Arrayish <arrayish>` data.
+    如果 *message* 是一个字符串, 它被转换为UTF-8字节，否则使用数据用 :ref:`Arrayish <arrayish>` 表示的二进制。
 
 .. code-block:: javascript
-    :caption: *signing transactions*
+    :caption: *交易签名*
 
     let privateKey = "0x3141592653589793238462643383279502884197169399375105820974944592"
     let wallet = new ethers.Wallet(privateKey)
@@ -221,7 +211,7 @@ Prototype 属性
         value: utils.parseEther("1.0"),
         data: "0x",
 
-        // This ensures the transaction cannot be replayed on different networks
+        // 这可确保无法在不同网络上重复广播
         chainId: ethers.utils.getNetwork('homestead').chainId
     }
 
@@ -235,7 +225,7 @@ Prototype 属性
         //    acdc47ab5dfaad46bcf63f2a34a05b2cb6290fd8ff801d07f6767df63c1c3da7
         //    a7b83b53cd6cea3d3075ef9597d5"
 
-        // This can now be sent to the Ethereum network
+        // 现在可以将其发送到以太坊网络
         let provider = ethers.getDefaultProvider()
         provider.sendTransaction(signedTransaction).then((tx) => {
 
@@ -253,12 +243,12 @@ Prototype 属性
 
 
 .. code-block:: javascript
-    :caption: *signing text messages*
+    :caption: *签名文本消息*
 
     let privateKey = "0x3141592653589793238462643383279502884197169399375105820974944592"
     let wallet = new ethers.Wallet(privateKey);
 
-    // Sign a text message
+    // 签名文本消息
     let signPromise = wallet.signMessage("Hello World!")
 
     signPromise.then((signature) => {
@@ -280,7 +270,7 @@ Prototype 属性
     });
 
 .. code-block:: javascript
-    :caption: *signing binary messages*
+    :caption: *签名二进制信息*
 
     let privateKey = "0x3141592653589793238462643383279502884197169399375105820974944592"
     let wallet = new ethers.Wallet(privateKey);
@@ -304,15 +294,15 @@ Prototype 属性
 与链交互
 ---------------------
 
-These operations require the wallet have a provider attached to it.
+这些操作要求钱包关联了一个  |provider| 。
 
 :sup:`prototype` . getBalance ( [ blockTag :sup:`= "latest"` ] ) |nbsp| :sup:`=>` |nbsp| :sup:`Promise<BigNumber>`
-    Returns a :ref:`Promise <promise>` that resolves to the balance of the wallet
-    (as a :ref:`BigNumber <bignumber>`, in **wei**) at the :ref:`blockTag <blocktag>`.
+    返回一个包含钱包余额的 a :ref:`Promise <promise>` 。
+    (余额为 :ref:`BigNumber <bignumber>`, 单位 **wei**) ，可选参数 :ref:`blockTag <blocktag>`.
 
 :sup:`prototype` . getTransactionCount ( [ blockTag :sup:`= "latest"` ] ) |nbsp| :sup:`=>` |nbsp| :sup:`Promise<number>`
-    Returns a :ref:`Promise <promise>` that resovles to the number of transactions
-    this account has ever sent (also called the *nonce*) at the :ref:`blockTag <blocktag>`.
+    返回一个包含账号已经发送交易数量（同样称为 *nonce*）的 :ref:`Promise <promise>` ，可选参数 :ref:`blockTag <blocktag>` 。
+
 
 :sup:`prototype` . estimateGas ( transaction ) |nbsp| :sup:`=>` |nbsp| :sup:`Promise<BigNumber>`
     Returns a :ref:`Promise <promise>` with the estimated cost for *transaction* (as a
@@ -349,7 +339,7 @@ These operations require the wallet have a provider attached to it.
 
 
 .. code-block:: javascript
-    :caption: *transfer ether*
+    :caption: *发送以太*
 
     // We require a provider to send transactions
     let provider = ethers.getDefaultProvider();
@@ -465,5 +455,5 @@ the following properties:
 .. _BIP-039: https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki
 .. _BIP-044: https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki
 .. _Ledger Hardware Wallet Signer: https://github.com/ethers-io/ethers-ledger
-.. _JSON Wallet: https://medium.com/@julien.maffre/what-is-an-ethereum-keystore-file-86c8c5917b97
+.. _JSON 钱包文件: https://medium.com/@julien.maffre/what-is-an-ethereum-keystore-file-86c8c5917b97
 .. EOF
