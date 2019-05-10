@@ -15,7 +15,8 @@ ethers.js 介绍
 ethers.js库旨在为以太坊区块链及其生态系统提供一个小而完整的 JavaScript API 库
 它最初是与`ethers.io`_一起使用，现在已经扩展为更通用的库。
 
-
+.. note::
+    译者注：Tiny熊`用 ethers.js 开发了网页钱包`_，是一个很好的学习案例。 
 
 包含功能
 ==========
@@ -53,6 +54,7 @@ ethers.js库旨在为以太坊区块链及其生态系统提供一个小而完�
 .. _MetaMask: https://metamask.io/
 .. _中文文档: https://docs.ethers.io
 .. _documentation: https://docs.ethers.io
+.. _用 ethers.js 开发了网页钱包: https://learnblockchain.cn/2019/04/11/wallet-dev-guide/#ethers.js
 
 Indices and tables
 ==================
