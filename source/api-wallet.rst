@@ -310,7 +310,7 @@ Prototype 属性
 .. _sendTransaction:
 
 :sup:`prototype` . sendTransaction ( transaction ) |nbsp| :sup:`=>` |nbsp| :sup:`Promise<TransactionResponse>`
-    发现 *交易* (参考 :ref:`Transaction Requests <transaction-request>`) 到网络，返回一个 可以获取  :ref:`Transaction Response <transaction-response>` 的 :ref:`Promise <promise>` 
+    发送 *交易* (参考 :ref:`Transaction Requests <transaction-request>`) 到网络，返回一个 可以获取  :ref:`Transaction Response <transaction-response>` 的 :ref:`Promise <promise>` 
     任何没有提供的属性将从网络获取填充。
 
 .. code-block:: javascript
@@ -422,8 +422,7 @@ Prototype 属性
 
 Signer API 是一个抽象类，当需要 |signer| 时就可以扩展实现它（不过是本库还是其他的库）。
 
- :ref:`Wallet <wallet>` 就是 |signer| 的一个继承实，以及 :ref:`JsonRpcSigner <signer-jsonrpc>` 和
-`Ledger Hardware Wallet Signer`_ 。
+ :ref:`Wallet <wallet>` 就是 |signer| 的一个继承实，以及 :ref:`JsonRpcSigner <signer-jsonrpc>` 和 `Ledger Hardware Wallet Signer`_ 。
 
 为了实现一个 |signer| , 需要继承抽象类 *ethers.types.Signer* 并实现下面的属性：
 
@@ -439,8 +438,7 @@ Signer API 是一个抽象类，当需要 |signer| 时就可以扩展实现它�
     如果参数 *message* 是字符串, 它被转换为UTF-8字节，否则使用数据用 :ref:`Arrayish <arrayish>` 表示的二进制。
 
 :sup:`object` . sendTransaction ( transaction ) |nbsp| :sup:`=>` |nbsp| :sup:`Promise<TransactionResponse>`
-    
-    发现 *交易transaction* (参考 :ref:`Transaction Requests <transaction-request>`) 到网络，返回一个 可以获取  :ref:`Transaction Response <transaction-response>` 的 :ref:`Promise <promise>` 
+    发送 *交易transaction* (参考 :ref:`Transaction Requests <transaction-request>`) 到网络，返回一个 可以获取  :ref:`Transaction Response <transaction-response>` 的 :ref:`Promise <promise>` 
     任何没有提供的属性将从网络获取填充。
 
 -----
