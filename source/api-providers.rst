@@ -3,29 +3,24 @@
 
 .. _api-provider:
 
-|provider| 
-***************
+提供者 Provider 
+*****************
 
 |provider| 是一个连接以太坊网络的抽象，用与查询以太坊网络状态或者发送更改状态的交易。
 
-The *EtherscanProvider* and *InfuraProvider* offer the ability to connect to public
-third-party providers without the need to run any Ethereum node yourself.
+*EtherscanProvider* 和 *InfuraProvider* 提供连接公开的第三方节点服务提供商，无需自己运行任何以太坊节点。
 
-The *JsonRpcProvider* and *IpcProvider* allow you to connect to Ethereum nodes you
-control or have access to, including mainnet, testnets, proof-of-authority (PoA)
-nodes or Ganache.
+*JsonRpcProvider* 和 *IpcProvider* 允许连接到我们控制或可以访问的以太坊节点（包括主网，测试网，权威证明（PoA）节点或Ganache）。
 
-If you already have a Web3 application, or Web3-compatible Provider
-(e.g. MetaMask's web3.currentProvider), it can be wrapped by a *Web3Provider* to make
-it compatible with the ethers Provider API.
+如果你已经有 Web3 应用程序或 Web3 兼容的 |provider| （例如 MetaMask 的 web3.currentProvider ），它可以用 *Web3Provider* 包装来使它与ethers的Provider API 兼容。
 
-For most situations, it is recommended that you use a default provider, which will
-connect to both Etherscan and INFURA simultaneously:
+在大多数情况下，建议使用默认 |provider| ， 它同时连接 Etherscan 和 INFURA 。
+
 
 .. code-block:: javascript
-    :caption: *connect to a default provider*
+    :caption: *连接默认的 provider*
 
-    // You can use any standard network name
+    // 可以使用任何标准网络名称做参数： 
     //  - "homestead"
     //  - "rinkeby"
     //  - "ropsten"
@@ -35,10 +30,10 @@ connect to both Etherscan and INFURA simultaneously:
     let provider = ethers.getDefaultProvider('ropsten');
 
 .. code-block:: javascript
-    :caption: *connect to MetaMask*
+    :caption: *连接 MetaMask*
 
-    // The network will be automatically detected; if the network is
-    // changed in MetaMask, it causes a page refresh.
+    // 将自动检测网络; 
+    // 如果在MetaMask中更改了网络，则会导致页面刷新。
 
     let provider = new ethers.providers.Web3Provider(web3.currentProvider);
 
@@ -49,28 +44,26 @@ connect to both Etherscan and INFURA simultaneously:
 连接以太坊网络
 ======================
 
-There are several methods to connect to the Ethereum network provided. If you are not
-running your own local Ethereum node, it is recommended that you use the ``getDefaultProvider()``
-method.
+有几种方法可以连接到以太坊提供的网络。如果你不是运行您自己的本地以太坊节点，建议使用 ``getDefaultProvider()`` 方法。
+
 
 :sup:`ethers` . getDefaultProvider( [ network :sup:`= "homestead"` ] ) |nbsp| :sup:`=>` |nbsp| :sup:`Provider`
-    This creates a FallbackProvider backed by multiple backends (INFURA and Etherscan).
-
-    This is the **recommended** method of connecting to the Ethereum network if you are
-    not running your own Ethereum node.
+    
+    创建（返回）一个由多个后端（INFURA 和 Etherscan）支持的 FallbackProvider 。
+    如果你不是运行自己的以太坊节点，这是**推荐**的连接以太坊网络的方法
 
 new :sup:`ethers . providers` . EtherscanProvider( [ network :sup:`= "homestead"` ] [ , apiToken ] )
-    Connect to the `Etherscan`_ blockchain `web service API`_.
+    连接 `Etherscan`_ blockchain `web 服务 API <https://etherscan.io/apis>`_.
 
-    **Also See:** Etherscan provider-specific :ref:`Properties <provider-etherscan-properties>` and :ref:`Operations <provider-etherscan-extra>`
+    **参考:** Etherscan 说明： :ref:`属性 <provider-etherscan-properties>` 和 :ref:`方法 <provider-etherscan-extra>`
 
 new :sup:`ethers . providers` . InfuraProvider( [ network :sup:`= "homestead"` ] [ , apiAccessToken ] )
-    Connect to the `INFURA`_ hosted network of Ethereum nodes.
+    连接 `INFURA`_ hosted network of Ethereum nodes.
 
-    **Also See:** INFURA provider-specific :ref:`Properties <provider-infura-properties>`
+    **参考:** INFURA 说明： :ref:`属性 <provider-infura-properties>`
 
 new :sup:`ethers . providers` . JsonRpcProvider( [ urlOrInfo :sup:`= "http://localhost:8545"` ] [ , network ] )
-    Connect to the `JSON-RPC API`_ URL *urlorInfo* of an Ethereum node, such as `Parity`_ or `Geth`_.
+    连接 `JSON-RPC API`_ URL *urlorInfo* of an Ethereum node, such as `Parity`_ or `Geth`_.
 
     The *urlOrInfo* may also be specified as an object with the properties:
 
@@ -79,36 +72,36 @@ new :sup:`ethers . providers` . JsonRpcProvider( [ urlOrInfo :sup:`= "http://loc
     - **password** --- a password to use for Basic Authentication (optional)
     - **allowInsecure** --- allow Basic Authentication over an insecure HTTP network (default: false)
 
-    **Also See:** JSON-RPC provider-specific :ref:`Properties <provider-jsonrpc-properties>` and :ref:`Operations <provider-jsonrpc-extra>`
+    **参考:** JSON-RPC 说明： :ref:`属性 <provider-jsonrpc-properties>` 和 :ref:`方法 <provider-jsonrpc-extra>`
 
 new :sup:`ethers . providers` . Web3Provider( web3Provider [ , network ] )
-    Connect to an existing Web3 provider (e.g. `web3Instance.currentProvider`).
+    连接到现有的 Web3 提供者 (如： `web3Instance.currentProvider`).
 
     The *network* is also automatically detected if not specified; see the above
     description of *network* for JsonRpcProvider for details.
 
-    **Also See:** Web3 provider-specific :ref:`Properties <provider-web3-properties>` and :ref:`Operations <provider-jsonrpc-extra>`
+    **参考:** Web3 说明： :ref:`属性 <provider-web3-properties>` 和 :ref:`方法 <provider-jsonrpc-extra>`
 
 new :sup:`ethers . providers` . FallbackProvider( providers )
     Improves reliability by attempting each provider in turn, falling back to the
     next in the list if an error was encountered. The network is determined from the
     providers and the **must** match each other.
 
-    **Also See:** Fallback provider-specific :ref:`Properties <provider-fallback-properties>`
+    **参考:** Fallback 说明： :ref:`属性 <provider-fallback-properties>`
 
 new :sup:`ethers . providers` . IpcProvider( path [ , network ] )
-    Connect to the `JSON-RPC API`_ *path* over IPC (named pipes) to an Ethereum node, such
+    连接 `JSON-RPC API`_ *path* over IPC (named pipes) to an Ethereum node, such
     as `Parity`_ or `Geth`_.
 
     The *network* is also automatically detected if not specified; see the above
     description of *network* for JsonRpcProvider for details.
 
-    **Also See:** IPC provider-specific :ref:`Properties <provider-ipc-properties>` and :ref:`Operations <provider-jsonrpc-extra>`
+    **参考:** IPC 说明： :ref:`属性 <provider-ipc-properties>` 和 :ref:`方法 <provider-jsonrpc-extra>`
 
 .. code-block:: javascript
     :caption: *connect to third-party providers*
 
-    // You can use any standard network name
+    // 可以使用任何标准网络名称做参数： 
     //  - "homestead"
     //  - "rinkeby"
     //  - "ropsten"
@@ -125,12 +118,12 @@ new :sup:`ethers . providers` . IpcProvider( path [ , network ] )
     let infuraProvider = new ethers.providers.InfuraProvider('ropsten');
 
 .. code-block:: javascript
-    :caption: *connect to a Geth or Parity node*
+    :caption: *连接 Geth 或 Parity 节点*
 
-    // When using the JSON-RPC API, the network will be automatically detected
+    // 在使用JSON-RPC API时，将自动检测网络 
 
 
-    // Default: http://localhost:8545
+    // 默认: http://localhost:8545
     let httpProvider = new ethers.providers.JsonRpcProvider();
 
 
@@ -623,7 +616,7 @@ any address
     ``callback( balance )``
 
 any transaction hash
-    When the corresponding transaction has been included in a block; also see
+    When the corresponding transaction has been included in a block; 参考
     :ref:`Waiting for Transactions <waitForTransaction>`.
 
     ``callback( transactionReceipt )``

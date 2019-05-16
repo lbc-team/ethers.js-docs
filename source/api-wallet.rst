@@ -6,7 +6,7 @@
 在使用接口之前，需要先确保正确 `引入了 ethers.js <getting-started>`_ 。
  
 
-|wallet| 类 和 |signer| 接口
+钱包类 Wallet 和 签名器 Signer
 **************************************
 
  |wallet| 类管理着一个公私钥对用于在以太坊网络上密码签名交易以及所有权证明。
@@ -305,19 +305,16 @@ Prototype 属性
 
 
 :sup:`prototype` . estimateGas ( transaction ) |nbsp| :sup:`=>` |nbsp| :sup:`Promise<BigNumber>`
-    Returns a :ref:`Promise <promise>` with the estimated cost for *transaction* (as a
-    :ref:`BigNumber <bignumber>`, in **gas**)
+    返回给定**交易**需要的（测算）Gas，返回 :ref:`BigNumber <bignumber>` 的 a :ref:`Promise <promise>` 。
 
 .. _sendTransaction:
 
 :sup:`prototype` . sendTransaction ( transaction ) |nbsp| :sup:`=>` |nbsp| :sup:`Promise<TransactionResponse>`
-    Sends the *transaction* (see :ref:`Transaction Requests <transaction-request>`) to
-    the network and returns a :ref:`Promise <promise>` that resolves to a
-    :ref:`Transaction Response <transaction-response>`. Any properties that are not
-    provided will be populated from the network.
+    发现 *交易* (参考 :ref:`Transaction Requests <transaction-request>`) 到网络，返回一个 可以获取  :ref:`Transaction Response <transaction-response>` 的 :ref:`Promise <promise>` 
+    任何没有提供的属性将从网络获取填充。
 
 .. code-block:: javascript
-    :caption: *query the network*
+    :caption: *查询网络*
 
     // We require a provider to query the network
     let provider = ethers.getDefaultProvider();
@@ -376,32 +373,33 @@ Prototype 属性
 处理加密的 JSON 钱包文件
 --------------------------------------------
 
-Many systems store private keys as encrypted JSON wallets (keystore), in various formats. There are several
-formats and algorithms that are used, all of which are supported to be read.
-Only the secure scrypt variation can be generated.
+很多系统以各种格式将私钥存储为加密的JSON钱包文件（keystore）。 keystore有好几个使用的格式和算法，ethers.js 都能够支持。
+当能只有经过正确安全的密码验证才可以生成keystore 或 解密出 Wallet 对象。
 
-See :ref:`Wallet.fromEncryptedJson <fromEncryptedJson>` for creating a
-Wallet instance from a JSON wallet.
+.. note::
+
+    关于加密的JSON钱包文件（keystore），可参考阅读 ` 钱包开发之 - 账号 Keystore 文件导入导出 <https://learnblockchain.cn/2018/10/25/eth-web-wallet_2/>`_ 。
+
+
+从JSON钱包文件（keystore）创建 Wallet 对象，  参考 :ref:`Wallet.fromEncryptedJson <fromEncryptedJson>` 。
 
 :sup:`prototype` . encrypt ( password [ , options [ , progressCallback ] ] ) |nbsp| :sup:`=>` |nbsp| :sup:`Promise<string>`
-    Encrypts the wallet as an encrypted JSON wallet, with the *password*.
+    使用*密码password* 加密钱包生成加密的JSON钱包文件（keystore）。
 
-    All options are optional. The valid options are:
+    参数 options 是可选的，有效选项如下：
 
-        - **salt** --- the salt to use for scrypt
-        - **iv** --- the initialization vecotr to use for aes-ctr-128
-        - **uuid** --- the UUID to use for the wallet
-        - **scrypt** --- the scrypt parameters to use (N, r and p)
-        - **entropy** --- the mnemonic entropy of this wallet; generally you should **not** specify this
-        - **mnemonic** --- the mnemonic phrase of this wallet; generally you should **not** specify this
-        - **path** --- the mnemonic path of this wallet; generally you should **not** specify this
+        - **salt** --- scrypt （一个秘钥衍生算法） 的盐
+        - **iv** --- aes-ctr-128 需要使用的初始化矢量
+        - **uuid** --- 钱包要用的 UUID 
+        - **scrypt** --- scrypt 算法的参数 (N, r 及 p)
+        - **entropy** --- 通常不指定，钱包的助记词熵;
+        - **mnemonic** --- 通常不指定，钱包的助记词
+        - **path** --- t通常不指定，钱包的助记词路径
 
-    If the *progressCallback* is specified, it will be called periodically during
-    encryption with a value between 0 and 1, inclusive indicating the progress.
-
+    如果使用了参数 *progressCallback* ,  它将在加密期间周期的调用参数指定的函数，Callback 函数需要制定一个参数，用来接收进度（介于0和1之间，包括0和1）。
 
 .. code-block:: javascript
-    :caption: *encrypt a wallet as an encrypted JSON wallet*
+    :caption: *加密钱包输出 JSON wallet*
 
     let password = "password123";
 
@@ -422,33 +420,28 @@ Wallet instance from a JSON wallet.
 |signer| 接口
 ==================
 
-The Signer API is an abstract class which makes it easy to extend and add new signers,
-that can be used by this library and extension libraries. The :ref:`Wallet <wallet>`
-extends the Signer API, as do the :ref:`JsonRpcSigner <signer-jsonrpc>` and the
-`Ledger Hardware Wallet Signer`_.
+Signer API 是一个抽象类，当需要 |signer| 时就可以扩展实现它（不过是本库还是其他的库）。
 
-To implement a Signer, inherit the abstract class *ethers.types.Signer* and implement
-the following properties:
+ :ref:`Wallet <wallet>` 就是 |signer| 的一个继承实，以及 :ref:`JsonRpcSigner <signer-jsonrpc>` 和
+`Ledger Hardware Wallet Signer`_ 。
+
+为了实现一个 |signer| , 需要继承抽象类 *ethers.types.Signer* 并实现下面的属性：
 
 :sup:`object` . provider
-    A :ref:`Provider <api-provider>` that is connected to the network. This is optional, however,
-    without a *provider*, **only** *write-only* operations should be expected to work.
+    （可选）连接网络的 :ref:`Provider <api-provider>` 。 不过，如果没有*提供者*，**只有** *write-only* 操作可以工作。
 
 :sup:`object` . getAddress ( ) |nbsp| :sup:`=>` |nbsp| :sup:`Promise<Address>`
-    Returns a :ref:`Promise <promise>` that resolves to the account address.
+    返回可获取账号地址的 :ref:`Promise <promise>` 。
 
 :sup:`object` . signMessage ( message ) |nbsp| :sup:`=>` |nbsp| :sup:`Promise<hex>`
-    Returns a :ref:`Promise <promise>` that resolves to the :ref:`Flat-Format Signature <signature>`
-    for the *message*.
+    返回包含*信息message* :ref:`Flat-Format Signature <signature>` 的 :ref:`Promise <promise>` 。
 
-    If *message* is a string, it is converted to UTF-8 bytes, otherwise it is
-    preserved as a binary representation of the :ref:`Arrayish <arrayish>` data.
+    如果参数 *message* 是字符串, 它被转换为UTF-8字节，否则使用数据用 :ref:`Arrayish <arrayish>` 表示的二进制。
 
 :sup:`object` . sendTransaction ( transaction ) |nbsp| :sup:`=>` |nbsp| :sup:`Promise<TransactionResponse>`
-    Sends the *transaction* (see :ref:`Transaction Requests <transaction-request>`) to
-    the network and returns a :ref:`Promise <promise>` that resolves to a
-    :ref:`Transaction Response <transaction-response>`. Any properties that are not
-    provided will be populated from the network.
+    
+    发现 *交易transaction* (参考 :ref:`Transaction Requests <transaction-request>`) 到网络，返回一个 可以获取  :ref:`Transaction Response <transaction-response>` 的 :ref:`Promise <promise>` 
+    任何没有提供的属性将从网络获取填充。
 
 -----
 
