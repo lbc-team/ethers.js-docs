@@ -151,145 +151,137 @@ new :sup:`ethers . providers` . IpcProvider( path [ , network ] )
 
 .. _provider:
 
-Provider
-----------------
+基类 Provider 属性
+-------------------
 
 :sup:`prototype` . blockNumber
-    The most recent block number (block height) this provider has seen and has triggered
-    events for. If no block has been seen, this is *null*.
+
+    返回 |provider| 已经知晓的最新区块号（块高），如果没有同步到区块，则为 *null*。
 
 :sup:`prototype` . polling
-    *mutable*
+    *可变的 mutable*
 
-    If the provider is currently polling because it is actively watching for events. This
-    may be set to enable/disable polling temporarily or disabled permanently to allow a
-    node process to exit.
+    如果 |provider| 当前正在轮询，因为它活跃的观察事件。
+    轮询可以设置为临时启用/禁用或永久禁用以允许节点进程退出。
 
 :sup:`prototype` . pollingInterval
-    *mutable*
+    *可变的 mutable*
 
-    The frequency (in ms) that the provider is polling. The default interval is 4 seconds.
+    |provider| 的轮询频率（以毫秒为单位）。 默认时间间隔为4秒。
 
-    This may make sense to lower for PoA networks or when polling a local node. When polling
-    Etherscan or INFURA, setting this too low may result in the service blocking your IP
-    address or otherwise throttling your API calls.
+    对于 PoA 网络本地节点时，更小的轮询间隔也许有意义。 不过但轮询Etherscan或INFURA时，设置得太低可能会导致服务阻止我们的IP地址或以其他方式限制API调用。
 
 .. _provider-etherscan-properties:
 
-EtherscanProvider :sup:`( inherits from Provider )`
+EtherscanProvider （派生于Provider）属性
 -------------------------------------------------------
 
 :sup:`prototype` . apiToken
-    The Etherscan API Token (or null if not specified)
+    The Etherscan API Token (如果没有指定则为空)
 
 .. _provider-infura-properties:
 
-InfuraProvider :sup:`( inherits from JsonRpcProvider )`
+InfuraProvider （派生于 JsonRpcProvider ）属性
 -------------------------------------------------------
 
 :sup:`prototype` . apiAccessToken
-    The INFURA API Access Token (or null if not specified)
+    The INFURA API Access Token (如果没有指定则为空)
 
 
 .. _provider-jsonrpc-properties:
 
-JsonRpcProvider :sup:`( inherits from Provider )`
+JsonRpcProvider （派生于Provider）属性
 -----------------------------------------------------
 
 :sup:`prototype` . connection
-    An object describing the connection of the JSON-RPC endpoint with the properties:
+    描述JSON-RPC 节点与属性的连接对象：
 
     - **url** --- the JSON-RPC URL
-    - **user** --- a username to use for Basic Authentication (可选)
-    - **password** --- a password to use for Basic Authentication (可选)
-    - **allowInsecure** --- allows Basic Authentication over an insecure HTTP network
+    - **user** --- 用于基本身份验证的用户名  (可选)
+    - **password** --- 用于基本身份验证的密码 (可选)
+    - **allowInsecure** --- 允许通过不安全的HTTP网络进行基本身份验证
 
 .. _provider-web3-properties:
 
-Web3Provider :sup:`( inherits from JsonRpcProvider )`
+Web3Provider （派生于 JsonRpcProvider ）属性
 -----------------------------------------------------
 
 :sup:`prototype` . provider
-    The underlying Web3-compatible provider from the Web3 library, for example
-    an `HTTPProvider`_ or `IPCProvider`_. The only required method on a Web3 provider
-    is:
+    与 Web3 库兼用的底层 |provider| 。 比如： `HTTPProvider`_ 或 `IPCProvider`_ 。 Web3 |provider| 唯一需要的方法是:
 
     - **sendAsync ( method , params , callback )**
 
 .. _provider-fallback-properties:
 
-FallbackProvider :sup:`( inherits from Provider )`
+FallbackProvider （派生于Provider）属性
 ------------------------------------------------------
 
 :sup:`prototype` . providers
-    A **copy** of the array of providers (modifying this variable will not affect
-    the attached providers)
+    一组 |provider| 的拷贝(修改此变量不会影响关联的 |provider| )。
 
 
 .. _provider-ipc-properties:
 
-IpcProvider :sup:`( inherits from JsonRpcProvider )`
+IpcProvider （派生于 JsonRpcProvider ）属性
 ----------------------------------------------------
 
 :sup:`prototype` . path
-    The JSON-RPC IPC (named pipe) path the provider is connected to.
+    返回连接的 JSON-RPC IPC（命名管道）路径。
 
 
 -----
 
 .. _provider-network:
 
-网络
-=======
+获取网络
+=========
 
 :sup:`prototype` . getNetwork ( ) |nbsp| :sup:`=>` |nbsp| :sup:`Promise<Network>`
-    A :ref:`Promise <promise>` that resolves to a :ref:`Network <network>` object
-    describing the connected network and chain.
+    返回可获取 :ref:`网络 <network>` 对象的 :ref:`Promise <promise>` ，包含了连接的网络和链信息。
 
 -----
 
 .. _provider-account:
 
-账号
-=======
+获取账号信息
+===========
 
 :sup:`prototype` . getBalance ( addressOrName [ , blockTag :sup:`= "latest"` ] ) |nbsp| :sup:`=>` |nbsp| :sup:`Promise<BigNumber>`
-    Returns a :ref:`Promise <promise>` with the balance (as a :ref:`BigNumber <bignumber>`) of
-    *addressOrName* at *blockTag*. (See: :ref:`Block Tags <blocktag>`)
+    返回参数 *addressOrName* 余额的（类型为 :ref:`BigNumber <bignumber>` ） :ref:`Promise <promise>` 对象。
+    可选参数 *blockTag* (参考: :ref:`Block Tags <blocktag>`) 指定一个区块。
 
 :sup:`prototype` . getTransactionCount ( addressOrName [ , blockTag :sup:`= "latest"` ] ) |nbsp| :sup:`=>` |nbsp| :sup:`Promise<number>`
-    Returns a :ref:`Promise <promise>` with the number of sent transactions (as a Number) from
-    *addressOrName* at *blockTag*. This is also the nonce required to send a new
-    transaction. (See: :ref:`Block Tags <blocktag>`)
+    返回参数 *addressOrName* 的所发送交易数量（Number对象）的 :ref:`Promise <promise>` 对象，它用来作为发送交易的nonce。
+    可选参数 *blockTag* 指定一个区块， (参考: :ref:`Block Tags <blocktag>`) 。
 
 
 .. code-block:: javascript
-    :caption: *get the balance of an account*
+    :caption: *获取账号余额*
 
     let address = "0x02F024e0882B310c6734703AB9066EdD3a10C6e0";
 
     provider.getBalance(address).then((balance) => {
 
-        // balance is a BigNumber (in wei); format is as a sting (in ether)
+        // 余额是 BigNumber (in wei); 格式化为 ether 字符串
         let etherString = ethers.utils.formatEther(balance);
 
         console.log("Balance: " + etherString);
     });
 
 .. code-block:: javascript
-    :caption: *get the transaction count of an account*
+    :caption: *获取账号所发送交易数量*
 
     let address = "0x02F024e0882B310c6734703AB9066EdD3a10C6e0";
 
     provider.getTransactionCount(address).then((transactionCount) => {
-        console.log("Total Transactions Ever Sent: " + transactionCount);
+        console.log("发送交易总数: " + transactionCount);
     });
 
 -----
 
 .. _provider-blockchain:
 
-以太坊状态
+获取以太坊状态
 =================
 
 :sup:`prototype` . getBlockNumber ( ) |nbsp| :sup:`=>` |nbsp| :sup:`Promise<number>`
@@ -310,7 +302,7 @@ IpcProvider :sup:`( inherits from JsonRpcProvider )`
 
 
 .. code-block:: javascript
-    :caption: *current state*
+    :caption: *获取当前状态*
 
     provider.getBlockNumber().then((blockNumber) => {
         console.log("Current block number: " + blockNumber);
