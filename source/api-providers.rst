@@ -58,48 +58,43 @@ new :sup:`ethers . providers` . EtherscanProvider( [ network :sup:`= "homestead"
     **参考:** Etherscan 说明： :ref:`属性 <provider-etherscan-properties>` 和 :ref:`方法 <provider-etherscan-extra>`
 
 new :sup:`ethers . providers` . InfuraProvider( [ network :sup:`= "homestead"` ] [ , apiAccessToken ] )
-    连接 `INFURA`_ hosted network of Ethereum nodes.
+    连接 `INFURA`_ 提供的以太坊节点。
 
     **参考:** INFURA 说明： :ref:`属性 <provider-infura-properties>`
 
 new :sup:`ethers . providers` . JsonRpcProvider( [ urlOrInfo :sup:`= "http://localhost:8545"` ] [ , network ] )
-    连接 `JSON-RPC API`_ URL *urlorInfo* of an Ethereum node, such as `Parity`_ or `Geth`_.
+    通过节点 *urlorInfo* 的 `JSON-RPC API`_ URL 进行连接, 如： `Parity`_ 或 `Geth`_ 。
 
-    The *urlOrInfo* may also be specified as an object with the properties:
+    参数： *urlOrInfo* 也可以作为一个对象，可以指定以下参数：
 
-    - **url** --- the JSON-RPC URL (required)
-    - **user** --- a username to use for Basic Authentication (optional)
-    - **password** --- a password to use for Basic Authentication (optional)
-    - **allowInsecure** --- allow Basic Authentication over an insecure HTTP network (default: false)
+    - **url** --- JSON-RPC URL (必须)
+    - **user** --- 用于基本身份验证的用户名 (可选)
+    - **password** --- 用于基本身份验证的密码 (可选)
+    - **allowInsecure** --- 允许通过不安全的HTTP网络进行基本身份验证 (默认值: false)
 
     **参考:** JSON-RPC 说明： :ref:`属性 <provider-jsonrpc-properties>` 和 :ref:`方法 <provider-jsonrpc-extra>`
 
 new :sup:`ethers . providers` . Web3Provider( web3Provider [ , network ] )
     连接到现有的 Web3 提供者 (如： `web3Instance.currentProvider`).
 
-    The *network* is also automatically detected if not specified; see the above
-    description of *network* for JsonRpcProvider for details.
+    如果没指定参数 *network* ，也会自动检测网络 *network* （主网还是测试网）; 有关详细信息见上文 JsonRpcProvider 的 *network* 说明。
 
     **参考:** Web3 说明： :ref:`属性 <provider-web3-properties>` 和 :ref:`方法 <provider-jsonrpc-extra>`
 
 new :sup:`ethers . providers` . FallbackProvider( providers )
-    Improves reliability by attempting each provider in turn, falling back to the
-    next in the list if an error was encountered. The network is determined from the
-    providers and the **must** match each other.
+    通过依次尝试每个 |provider| 来提高可靠性，如果遇到错误，则返回列表中的下一个提供程序。 网络由 |provider|  确定，**必须** 相互匹配。
 
     **参考:** Fallback 说明： :ref:`属性 <provider-fallback-properties>`
 
 new :sup:`ethers . providers` . IpcProvider( path [ , network ] )
-    连接 `JSON-RPC API`_ *path* over IPC (named pipes) to an Ethereum node, such
-    as `Parity`_ or `Geth`_.
+    通过节点 IPC  `JSON-RPC API`_ 连接节点， 如： `Parity`_ 或 `Geth`_ 。提供一个 IPC路径 *path* such
 
-    The *network* is also automatically detected if not specified; see the above
-    description of *network* for JsonRpcProvider for details.
+    如果没指定参数 *network* ，也会自动检测网络 *network* （主网还是测试网）; 有关详细信息见上文 JsonRpcProvider 的 *network* 说明。
 
     **参考:** IPC 说明： :ref:`属性 <provider-ipc-properties>` 和 :ref:`方法 <provider-jsonrpc-extra>`
 
 .. code-block:: javascript
-    :caption: *connect to third-party providers*
+    :caption: *连接第三方提供者*
 
     // 可以使用任何标准网络名称做参数： 
     //  - "homestead"
@@ -109,11 +104,11 @@ new :sup:`ethers . providers` . IpcProvider( path [ , network ] )
 
     let defaultProvider = ethers.getDefaultProvider('ropsten');
 
-    // ... OR ...
+    // ... 或 ...
 
     let etherscanProvider = new ethers.providers.EtherscanProvider('ropsten');
 
-    // ... OR ...
+    // ... 或 ...
 
     let infuraProvider = new ethers.providers.InfuraProvider('ropsten');
 
@@ -127,20 +122,20 @@ new :sup:`ethers . providers` . IpcProvider( path [ , network ] )
     let httpProvider = new ethers.providers.JsonRpcProvider();
 
 
-    // To connect to a custom URL:
+    // 通过定制 URL 连接 :
     let url = "http://something-else.com:8546";
     let customHttpProvider = new ethers.providers.JsonRpcProvider(url);
 
 
-    // Connect over named pipes using IPC:
+    // 通过 IPC 命名管道
     let path = "/var/run/parity.ipc";
     let ipcProvider = new ethers.providers.IpcProvider(path);
 
 
 .. code-block:: javascript
-    :caption: *connect to an existing Web3 Provider*
+    :caption: *连接一个已有的 Web3 提供者*
 
-    // When using a Web3 provider, the network will be automatically detected
+    // 使用 Web3 provider 时, 自动检测网络
 
     // e.g. HTTP provider
     let currentProvider = new web3.providers.HttpProvider('http://localhost:8545');
@@ -152,13 +147,12 @@ new :sup:`ethers . providers` . IpcProvider( path [ , network ] )
 属性
 ==========
 
-All properties are immutable unless otherwise specified, and will reflect their
-default values if left unspecified.
+除非另有说明，否则所有属性都是不可变的，如果未指定，则将采用默认值。
 
 .. _provider:
 
 Provider
---------
+----------------
 
 :sup:`prototype` . blockNumber
     The most recent block number (block height) this provider has seen and has triggered
@@ -206,8 +200,8 @@ JsonRpcProvider :sup:`( inherits from Provider )`
     An object describing the connection of the JSON-RPC endpoint with the properties:
 
     - **url** --- the JSON-RPC URL
-    - **user** --- a username to use for Basic Authentication (optional)
-    - **password** --- a password to use for Basic Authentication (optional)
+    - **user** --- a username to use for Basic Authentication (可选)
+    - **password** --- a password to use for Basic Authentication (可选)
     - **allowInsecure** --- allows Basic Authentication over an insecure HTTP network
 
 .. _provider-web3-properties:
@@ -625,8 +619,8 @@ a filtered event object
     When the an event is logged by a transaction to the *address* with the
     associated *topics*. The filtered event properties are:
 
-    - **address** --- the contract address to filter by (optional)
-    - **topics** --- the log topics to filter by (optional)
+    - **address** --- the contract address to filter by (可选)
+    - **topics** --- the log topics to filter by (可选)
 
     ``callback( log )``
 
