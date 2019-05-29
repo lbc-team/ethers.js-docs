@@ -244,7 +244,7 @@ IpcProvider （派生于 JsonRpcProvider ）属性
 .. _provider-account:
 
 获取账号信息
-===========
+==============
 
 :sup:`prototype` . getBalance ( addressOrName [ , blockTag :sup:`= "latest"` ] ) |nbsp| :sup:`=>` |nbsp| :sup:`Promise<BigNumber>`
     返回参数 *addressOrName* 余额的（类型为 :ref:`BigNumber <bignumber>` ） :ref:`Promise <promise>` 对象。
@@ -285,20 +285,20 @@ IpcProvider （派生于 JsonRpcProvider ）属性
 =================
 
 :sup:`prototype` . getBlockNumber ( ) |nbsp| :sup:`=>` |nbsp| :sup:`Promise<number>`
-    Returns a :ref:`Promise <promise>` with the latest block number (as a Number).
+    返回最新区块号（Number类型）的 :ref:`Promise <promise>` 。
 
 :sup:`prototype` . getGasPrice ( ) |nbsp| :sup:`=>` |nbsp| :sup:`Promise<BigNumber>`
-    Returns a :ref:`Promise <promise>` with the current gas price (as a :ref:`BigNumber <bignumber>`).
+    返回当前 gas 价格  (类型 :ref:`BigNumber <bignumber>`) 的 :ref:`Promise <promise>` 。
 
 :sup:`prototype` . getBlock ( blockHashOrBlockNumber ) |nbsp| :sup:`=>` |nbsp| :sup:`Promise<Block>`
-    Returns a :ref:`Promise <promise>` with the block at *blockHashOrBlockNumber*. (See: :ref:`Block Responses <blockresponse>`)
+    返回给定参数对应的区块信息的 :ref:`Promise <promise>`  (参考: :ref:`区块回复 <blockresponse>`) 。
 
 :sup:`prototype` . getTransaction ( transactionHash ) |nbsp| :sup:`=>` |nbsp| :sup:`Promise<TransactionResponse>`
-    Returns a :ref:`Promise <promise>` with the transaction with *transactionHash*. (See: :ref:`Transaction Responses <transaction-response>`)
+    根据交易hash获取交易信息的 :ref:`Promise <promise>` 。 (参考: :ref:`交易回复 <transaction-response>`)
 
 :sup:`prototype` . getTransactionReceipt ( transactionHash ) |nbsp| :sup:`=>` |nbsp| :sup:`Promise<TransactionReceipt>`
-    Returns a :ref:`Promise <promise>` with the transaction receipt with *transactionHash*.
-    (See: :ref:`Transaction Receipts <transaction-receipt>`)
+    根据交易hash获取交易收据的 :ref:`Promise <promise>` 
+    (参考: :ref:`交易收据 <transaction-receipt>`)
 
 
 .. code-block:: javascript
@@ -316,23 +316,23 @@ IpcProvider （派生于 JsonRpcProvider ）属性
     });
 
 .. code-block:: javascript
-    :caption: *blocks*
+    :caption: *区块*
 
     // See: https://ropsten.etherscan.io/block/3346773
 
-    // Block Number
+    // 区块号
     provider.getBlock(3346773).then((block) => {
         console.log(block);
     });
 
-    // Block Hash
+    // 区块 Hash
     let blockHash = "0x7a1d0b010393c8d850200d0ec1e27c0c8a295366247b1bd6124d496cf59182ad";
     provider.getBlock(blockHash).then((block) => {
         console.log(block);
     });
 
 .. code-block:: javascript
-    :caption: *transactions*
+    :caption: *交易*
 
     // See: https://ropsten.etherscan.io/tx/0xa4ddad980075786c204b45ab8193e543aec4411bd94894abef47dc90d4d3cc01
 
@@ -353,7 +353,7 @@ IpcProvider （派生于 JsonRpcProvider ）属性
 以太坊域名服务 ENS 
 =======================
 
-The `Ethereum Naming Service`_ (ENS：Ethereum Naming Service) allows easy to remember and use names to be
+The `Ethereum Naming Service`_ (ENS：Ethereum Naming Service 以太坊域名服务) allows easy to remember and use names to be
 assigned to Ethereum addresses. Any provider operation which takes an address
 may also take an ENS name.
 
@@ -480,11 +480,11 @@ usually be used instead.
 
 :sup:`prototype` . getStorageAt ( addressOrName , position [ , blockTag :sup:`= "latest"` ] ) |nbsp| :sup:`=>` |nbsp| :sup:`Promise<hex>`
     Returns a :ref:`Promise <promise>` with the value (as a :ref:`hex string <hexstring>`) at
-    *addressOrName* in *position* at *blockTag*. (See :ref:`Block Tags <blocktag>`)
+    *addressOrName* in *position* at *blockTag*. (参考 :ref:`Block Tags <blocktag>`)
 
 :sup:`prototype` . getLogs ( filter ) |nbsp| :sup:`=>` |nbsp| :sup:`Promise< Log [ ] >`
     Returns a :ref:`Promise <promise>` with an array (possibly empty) of the logs that
-    match the *filter*. (See :ref:`Filters <filter>`)
+    match the *filter*. (参考 :ref:`Filters <filter>`)
 
 .. code-block:: javascript
     :caption: *get contract code*

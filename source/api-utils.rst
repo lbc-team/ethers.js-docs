@@ -4,8 +4,7 @@
 工具包
 *********
 
-The utility functions provide a large assortment of common utility functions
-required to write dapps, process user input and format data.
+工具包提供了大量的通用实用函数去编写 dapps、处理用户输入和格式化数据等功能。
 
 -----
 
@@ -64,7 +63,7 @@ addresses and various ways they are determined.
 .. _arrayish:
 
 Arrayish
-========
+==========
 
 An arrayish object is used to describe binary data and has the following conditions met:
 
