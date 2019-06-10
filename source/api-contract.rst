@@ -6,46 +6,30 @@
 合约
 *********
 
-A Contract is an abstraction of an executable program on the Ethereum Blockchain. A
-Contract has code (called byte code) as well as allocated long-term memory (called
-storage). Every deployed Contract has an address, which is used to connect to it
-so that it may be sent messages to call its methods.
+合约是在以太坊区块链上的可执行程序的抽象。合约具有代码 (称为字节代码) 以及分配的长期存储 (storage)。每个已部署的合约都有一个地址, 用它连接到合约, 可以向其发送消息来调用合约方法。
 
-A Contract can emit **Events**, which can be efficiently observed by applications to
-be notified when a contract has performed specific operation. Events cannot be read
-by a Contract.
+合约可以发出 **事件**, 它可以被应用程序监听（订阅）， 当合约执行了特定操作时, 应用程序将收到通知。事件是无法在合约内读取的。
 
-There are two types of methods that can be called on a Contract:
+在合约上可以调用两种类型的方法：
 
-    A **Constant** method may not add, remove or change any data in the storage, nor
-    log any events, and may only call **Constant** methods on other contracts. These
-    methods are free (**no** *Ether* is required) to call. The result from them may also
-    be returned to the caller.
+    `视图方法 <https://learnblockchain.cn/docs/solidity/contracts.html#view>`_ : 不能添加、移除或更改存储中的任何数据，也不能记录任何事件，并且只能调用其他合约上**视图方法**。
+    这些方法是免费的（不需要以太）调用。 结果也可以返回给调用者。
 
-    A **Non-Constant** method requires a fee (in *Ether*) to be paid, but may perform any
-    state-changing operation desired, log events, send ether and call **Non-Constant**
-    methods on other Contracts. These methods **cannot** return their result to the caller.
-    These methods must be triggered by a transaction, sent by an Externally Owned Account (EOA)
-    either directly or indirectly (i.e. called from another contract), and are required
-    to be mined before the effects are present. Therefore, the duration required for these
-    operations can vary widely, and depend on the transaction gas price, network congestion and
-    miner priority heuristics.
+    **非视图方法**: 需要支付费用（用Ether），但可以执行任何所需的状态更改操作，记录事件，发送ether并在其他合约上调用非视图方法。
+    这些方法**不能**将其结果返回给调用者。 这些方法必须由交易触发，由外部拥有的账户（EOA）直接或间接发送（如从另一个合约调用），并且只有在交易被打包（挖矿）后才会产生效果。
+    因此，这些操作所需的持续时间可能变化很大，并且取决于交易Gas价格、网络拥塞和矿工优先选择方法。
 
-The Contract API provides simple way to connect to a Contract and call its methods,
-as functions on a JavaScript object, handling all the binary protocol conversion,
-internal name mangling and topic construction. This allows a Contract object to be
-used like any standard JavaScript object, without having to worry about the
-low-level details of the Ethereum Virtual Machine or Blockchain.
 
-The Contract object is a meta-class, which is a class that defines a Class at
-run-time. The Contract definition (called an **Application Binary Interface**, or ABI)
-can be provided and the available methods and events will be dynamically added to
-the object.
+合约 API 提供了简单的方法来连接到一个合约并调用它的方法，它作为 JavaScript 对象上的函数，处理所有的二进制协议转换，内部名称修改和主题构造。
+这使得合约对象可以像任何标准的JavaScript对象一样使用，而不必担心以太坊虚拟机或区块链的低级细节。
 
-Throughout this document, we will refer to the following Contract.
+合约Contract对象是一个元类，它是一个在运行时定义类的类。 可以提供合约定义（称为应用程序二进制接口或ABI）以及可用的方法和事件可以动态添加到对象中。
+
+在本文档中，我们将参考以下合约。
+
 
 .. code-block:: javascript
-    :caption: *SimpleStorage Contract*
+    :caption: *SimpleStorage 合约*
 
     pragma solidity ^0.4.24;
 
@@ -77,25 +61,21 @@ Throughout this document, we will refer to the following Contract.
 部署合约
 ====================
 
-To deploy a contract to the Ethereum network, a **ContractFactory** can be created
-which manages the Contract bytecode and **Application Binary Interface** (ABI),
-usually generated from the *Solidity* compiler.
+为了将合约部署到以太坊网络，可以创建一个 **ContractFactory** 来管理合约字节码和 **应用程序二进制接口**（ABI），ABI通常由 *Solidity* 编译器生成。
 
-Creating a Contract Factory
+
+创建 ContractFactory
 ---------------------------
 
 new :sup:`ethers` . ContractFactory ( abi , bytecode [ , signer ] )
-    Creates a factory for deployment of the Contract with *bytecode*, and the
-    constructor defined in the *abi*. The *signer* will be used to send
-    any deployment transaction.
+    创建合约工厂，通过部署合约的 *字节码* 以及在 *abi* 中定义的构造函数来创建合约工厂。 *签名器 singer* 将用于发送任何部署交易
 
 :sup:`ethers` . ContractFactory . fromSolidity ( compilerOutput [ , signer ] )
-    Creates a ContractFactory from the *compilerOutput* of the *Solidity*
-    compiler or from the *Truffle* JSON.
-    (i.e. ``output.contracts['SimpleStorage.sol'].SimpleStorage``)
+    从Solidity编译器的 *compilerOutput* 或从 *Truffle*  JSON  (如： ``output.contracts['SimpleStorage.sol'].SimpleStorage``) 创建合约工厂 ContractFactory。
+   
 
 :sup:`prototype` . connect ( signer ) |nbsp| :sup:`=>` |nbsp| :sup:`ContractFactory`
-    Create a **new instance** of the ContractFactory, connected to the new *signer*.
+    创建连接到新 *签名器signer* 的ContractFactory **新实例** 。
 
 
 Prototype属性

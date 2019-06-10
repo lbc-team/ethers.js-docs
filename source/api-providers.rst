@@ -318,7 +318,7 @@ IpcProvider （派生于 JsonRpcProvider ）属性
 .. code-block:: javascript
     :caption: *区块*
 
-    // See: https://ropsten.etherscan.io/block/3346773
+    // 查看: https://ropsten.etherscan.io/block/3346773
 
     // 区块号
     provider.getBlock(3346773).then((block) => {
@@ -334,7 +334,7 @@ IpcProvider （派生于 JsonRpcProvider ）属性
 .. code-block:: javascript
     :caption: *交易*
 
-    // See: https://ropsten.etherscan.io/tx/0xa4ddad980075786c204b45ab8193e543aec4411bd94894abef47dc90d4d3cc01
+    // 查看: https://ropsten.etherscan.io/tx/0xa4ddad980075786c204b45ab8193e543aec4411bd94894abef47dc90d4d3cc01
 
     let transactionHash = "0xa4ddad980075786c204b45ab8193e543aec4411bd94894abef47dc90d4d3cc01"
 
@@ -353,23 +353,19 @@ IpcProvider （派生于 JsonRpcProvider ）属性
 以太坊域名服务 ENS 
 =======================
 
-The `Ethereum Naming Service`_ (ENS：Ethereum Naming Service 以太坊域名服务) allows easy to remember and use names to be
-assigned to Ethereum addresses. Any provider operation which takes an address
-may also take an ENS name.
+ `Ethereum Naming Service`_ (ENS：Ethereum Naming Service 以太坊域名服务) 允许使用一个容易记住的名称来关联一个以太坊地址。（译者注：类似于域名和IP地址）
+ 任何提供者的可以针对地址也可以针对ENS名称
 
-ENS also provides the ability for a reverse lookup, which determines the name
-for an address if it has been configured.
+ENS还提供反向查找功能，如果已经已配置，可以根据名称找到地址。
 
 :sup:`prototype` . resolveName ( ensName ) |nbsp| :sup:`=>` |nbsp| :sup:`Promise<Address>`
-    Returns a :ref:`Promise <promise>` which resolves to the address of that the *ensName*
-    resolves to (or *null* is not configured).
+    获取  *ensName* 对应地址的 :ref:`Promise <promise>` ，如果没有则为null 。
 
 :sup:`prototype` . lookupAddress ( address ) |nbsp| :sup:`=>` |nbsp| :sup:`Promise<string>`
-    Returns a :ref:`Promise <promise>` which resolves to the ENS name that *address* resolves
-    to (or *null* if not configured).
+    获取  *address* 对应的  ENS 名称的 :ref:`Promise <promise>` ，如果没有则为null 。
 
 .. code-block:: javascript
-    :caption: *resolve an ENS name to an address*
+    :caption: *将ENS名称解析为地址*
 
     provider.resolveName("registrar.firefly.eth").then(function(address) {
         console.log("Address: " + address);
@@ -377,7 +373,7 @@ for an address if it has been configured.
     });
 
 .. code-block:: javascript
-    :caption: *lookup the ENS name of an address*
+    :caption: *查找地址的ENS名称*
 
     let address = "0x6fC21092DA55B392b045eD78F4732bff3C580e2c";
     provider.lookupAddress(address).then(function(address) {
@@ -392,26 +388,24 @@ for an address if it has been configured.
 执行合约
 ==================
 
-These are relatively low-level calls. The :ref:`Contracts API <api-contract>` should
-usually be used instead.
+这些是相对低级别的调用。通常应该使用 :ref:`合约 API <api-contract>`  
 
 :sup:`prototype` . call ( transaction ) |nbsp| :sup:`=>` |nbsp| :sup:`Promise<hex>`
     Send the **read-only** (constant) *transaction* to a single Ethereum node and
     return a :ref:`Promise <promise>` with the result (as a :ref:`hex string <hexstring>`) of executing it.
     (See :ref:`Transaction Requests <transaction-request>`)
 
-    This is free, since it does not change any state on the blockchain.
+    免费执行，因为它不会改变区块链上的任何状态。
 
 :sup:`prototype` . estimateGas ( transaction ) |nbsp| :sup:`=>` |nbsp| :sup:`Promise<BigNumber>`
     Send a *transaction* to a single Ethereum node and return a :ref:`Promise <promise>` with the
     estimated amount of gas required (as a :ref:`BigNumber <bignumber>`) to send it.
     (See :ref:`Transaction Requests <transaction-request>`)
 
-    This is free, but only an estimate. Providing too little gas will result in a
-    transaction being rejected (while still consuming all provided gas).
+    免费执行，但只是一个估算。 提供太少的 Gas 将导致交易被拒绝（同时仍然消耗掉所有提供的Gas）。
 
 :sup:`prototype` . sendTransaction ( signedTransaction ) |nbsp| :sup:`=>` |nbsp| :sup:`Promise<TransactionResponse>`
-    Send the *signedTransaction* to the **entire** Ethereum network and returns a :ref:`Promise <promise>`
+    Send the *signedTransaction* to the **entire** Ethereum network and 返回 :ref:`Promise <promise>`
     that resolves to the :ref:`Transaction Response <transaction-response>`.
 
     If an error occurs after the netowrk **may have** received the transaction, the
@@ -475,15 +469,15 @@ usually be used instead.
 ==============
 
 :sup:`prototype` . getCode ( addressOrName ) |nbsp| :sup:`=>` |nbsp| :sup:`Promise<hex>`
-    Returns a :ref:`Promise <promise>` with the bytecode (as a :ref:`hex string <hexstring>`)
+    返回 :ref:`Promise <promise>` with the bytecode (as a :ref:`hex string <hexstring>`)
     at  *addressOrName*.
 
 :sup:`prototype` . getStorageAt ( addressOrName , position [ , blockTag :sup:`= "latest"` ] ) |nbsp| :sup:`=>` |nbsp| :sup:`Promise<hex>`
-    Returns a :ref:`Promise <promise>` with the value (as a :ref:`hex string <hexstring>`) at
+    返回 :ref:`Promise <promise>` with the value (as a :ref:`hex string <hexstring>`) at
     *addressOrName* in *position* at *blockTag*. (参考 :ref:`Block Tags <blocktag>`)
 
 :sup:`prototype` . getLogs ( filter ) |nbsp| :sup:`=>` |nbsp| :sup:`Promise< Log [ ] >`
-    Returns a :ref:`Promise <promise>` with an array (possibly empty) of the logs that
+    返回 :ref:`Promise <promise>` with an array (possibly empty) of the logs that
     match the *filter*. (参考 :ref:`Filters <filter>`)
 
 .. code-block:: javascript
@@ -628,7 +622,7 @@ an array of topics
 ------------------------
 
 :sup:`prototype` . waitForTransaction ( transactionHash ) |nbsp| :sup:`=>` |nbsp| :sup:`Promise<TransactionReceipt>`
-    Return a :ref:`Promise <promise>` which resolves to the
+    Return a :ref:`Promise <promise>` 可以获取到 the
     :ref:`Transaction Receipt <transaction-receipt>` once *transactionHash* is
     mined.
 
@@ -795,7 +789,7 @@ If a network does not have the ENS contract deployed to it, names cannot be reso
 
 Any property which accepts a number may also be specified as a :ref:`BigNumber <bignumber>`
 or :ref:`hex string <hexstring>`. Any property may also be given as a :ref:`Promise <promise>`
-which resolves to the expected type.
+可以获取到 the expected type.
 
 .. code-block:: javascript
     :caption: *Example*
@@ -983,10 +977,10 @@ Etherscan
 ---------
 
 :sup:`prototype` . getEtherPrice ( )
-    Returns a :ref:`Promise <promise>` with the price of ether in USD.
+    返回 :ref:`Promise <promise>` with the price of ether in USD.
 
 :sup:`prototype` . getHistory ( addressOrName [ , startBlock :sup:`= 0` [ , endBlock :sup:`= "latest"` ] ] )
-    Returns a :ref:`Promise <promise>` with an array of :ref:`Transaction Responses <transaction-response>`
+    返回 :ref:`Promise <promise>` with an array of :ref:`Transaction Responses <transaction-response>`
     for each transaction to or from *addressOrName* between *startBlock* and *endBlock* (inclusive).
 
 .. code-block:: javascript
@@ -1040,11 +1034,11 @@ JsonRpcProvider
     returned which will resolve to the parsed JSON result.
 
 :sup:`prototype` . listAccounts ( ) |nbsp| :sup:`=>` |nbsp| :sup:`Promise<Address [ ] >`
-    Returns a :ref:`Promise <promise>` with a list of all account addresses the
+    返回 :ref:`Promise <promise>` with a list of all account addresses the
     node connected to this Web3 controls.
 
 :sup:`prototype` . getSigner( [ indexOrAddress ] ) |nbsp| :sup:`=>` |nbsp| :sup:`JsonRpcSigner`
-    Returns a :ref:`JsonRpcSigner <signer-jsonrpc>` attached to an account on the
+    返回 :ref:`JsonRpcSigner <signer-jsonrpc>` attached to an account on the
     Ethereum node the Web3 object is connected to. If *indexOrAddress* is not specified,
     the first account on the node is used.
 
@@ -1079,17 +1073,17 @@ used to instantiate these.
     The provider that this Signer is connected to.
 
 :sup:`prototype` . getAddress ( ) |nbsp| :sup:`=>` |nbsp| :sup:`Promise<Address>`
-    Returns a :ref:`Promise <promise>` that resolves to the account address.
+    返回 :ref:`Promise <promise>` that resolves to the account address.
 
 :sup:`prototype` . getBalance ( [ blockTag :sup:`= "latest"` ] ) |nbsp| :sup:`=>` |nbsp| :sup:`Promise<BigNumber>`
-    Returns a :ref:`Promise <promise>` for the account balance.
+    返回 :ref:`Promise <promise>` for the account balance.
 
 :sup:`prototype` . getTransactionCount ( [ blockTag :sup:`= "latest"` ] ) |nbsp| :sup:`=>` |nbsp| :sup:`Promise<number>`
-    Returns a :ref:`Promise <promise>` for the account transaction count. This
+    返回 :ref:`Promise <promise>` for the account transaction count. This
     can be used to determine the next nonce to use for a transaction.
 
 :sup:`prototype` . sendTransaction ( [ transactionRequest ] ) |nbsp| :sup:`=>` |nbsp| :sup:`Promise<TransactionResponse>`
-    Returns a :ref:`Promise <promise>` that resolves to the Transaction Response for
+    返回 :ref:`Promise <promise>` that resolves to the Transaction Response for
     the sent transaction.
 
     If an error occurs after the netowrk **may have** received the transaction, the
@@ -1097,11 +1091,11 @@ used to instantiate these.
     so that further processing may be done.
 
 :sup:`prototype` . signMessage ( message ) |nbsp| :sup:`=>` |nbsp| :sup:`Promise<hex>`
-    Returns a :ref:`Promise <promise>` that resolves the signature of a signed message, in the
+    返回 :ref:`Promise <promise>` that resolves the signature of a signed message, in the
     :ref:`Flat Format <signature>`.
 
 :sup:`prototype` . unlock ( password ) |nbsp| :sup:`=>` |nbsp| :sup:`Promise<boolean>`
-    Returns a :ref:`Promise <promise>` the resolves to true or false, depending
+    返回 :ref:`Promise <promise>` the resolves to true or false, depending
     on whether the account unlock was successful.
 
 -----
