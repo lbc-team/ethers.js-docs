@@ -61,7 +61,7 @@
 部署合约
 ====================
 
-为了将合约部署到以太坊网络，可以创建一个 **ContractFactory** 来管理合约字节码和 **应用程序二进制接口**（ABI），ABI通常由 *Solidity* 编译器生成。
+为了将合约部署到以太坊网络，可以创建一个 **ContractFactory** 来管理合约字节码和 **应用程序二进制接口** （ABI），ABI通常由 *Solidity* 编译器生成。
 
 
 创建 ContractFactory
@@ -82,45 +82,36 @@ Prototype属性
 ------------------
 
 :sup:`prototype` . bytecode
-    The Contract executable byte code..
+    返回合约的可执行字节码。
 
 :sup:`prototype` . interface
-    The Contract Application Binary Interface (ABI).
+    返回合约应用程序二进制接口(ABI)。
 
 :sup:`prototype` . signer
-    The :ref:`Signer <signer>` that will be used to send transactions to the network.
-    If this is null, ``deploy()`` cannot be called.
+    返回 :ref:`签名器Signer <signer>` 用来发送交易到网络。
+    如果为空，则 ``deploy()``  不可以调用。
 
 
 关联地址
 ----------
 
 :sup:`prototype` . attach ( address ) |nbsp| :sup:`=>` |nbsp| :sup:`Contract`
-    Connect to an existing instance of this Contract at *address* using the
-    Contract Interface and Signer.
+    使用合约接口和签名器Singer 连接到现有合约实例。参数为合约 **地址**
 
 
-部署
+部署合约
 ----------
 
 :sup:`prototype` . deploy ( ... ) |nbsp| :sup:`=>` |nbsp| :sup:`Promise<Contract>`
-    Creates a transaction to deploy the transaction and
-    sends it to the network using the contract :ref:`Signer <signer>`, returning a
-    :ref:`Promise <promise>` that resolves to a Contract. The transaction is available
-    as contract.deployTransaction.
-
-    Keep in mind that the Contract may not be mined immediately. The
-    ``contract.deployed()`` function will return a :ref:`Promise <promise>`
-    which will resolve once the contract is deployed, or reject if there
-    was an error during deployment.
+    创建一个部署合约的交易，并使用合约 :ref:`Signer <signer>` 将其发送到网络，并返回合约对象的  :ref:`Promise <promise>` 。 交易记录通过 contract.deployTransaction 获取。
+    参数将传递给合约构造函数constructor。
+    请记住，合约可能不会立即挖出。 ``contract.deployed()`` 函数将返回一个 :ref:`Promise <promise>` ，将在部署合约后获取实例，或者在部署被拒绝时生成一个错误。
 
 :sup:`prototype` . getDeployTransaction ( ... ) |nbsp| :sup:`=>` |nbsp| :sup:`UnsignedTransaction`
-    Returns the transaction required to deploy the Contract with the provided
-    constructor arguments. This is often useful for signing offline transactions or
-    analysis tools.
+    返回部署合约（提供了构造参数）的交易。 通常可用于离线签名交易或分析工具。
 
 .. code-block:: javascript
-    :caption: *Deploy a Contract*
+    :caption: *部署合约*
 
     const ethers = require('ethers');
 
@@ -181,36 +172,36 @@ Prototype属性
                      "7b31ac6df494f4be31057c7202b5084c592bdb9b29f232407abeac0029";
 
 
-    // Connect to the network
+    // 连接网络
     let provider = ethers.getDefaultProvider('ropsten');
 
-    // Load the wallet to deploy the contract with
+    // 加载钱包以部署合约
     let privateKey = '0x0123456789012345678901234567890123456789012345678901234567890123';
     let wallet = new ethers.Wallet(privateKey, provider);
 
-    // Deployment is asynchronous, so we use an async IIFE
+    // 部署是异步的，所以我们使用异步IIFE
     (async function() {
 
-        // Create an instance of a Contract Factory
+        // 常见合约工厂实例
         let factory = new ethers.ContractFactory(abi, bytecode, wallet);
 
-        // Notice we pass in "Hello World" as the parameter to the constructor
+        // 请注意，我们将 "Hello World" 作为参数传递给合约构造函数constructor
         let contract = await factory.deploy("Hello World");
 
-        // The address the Contract WILL have once mined
-        // See: https://ropsten.etherscan.io/address/0x2bd9aaa2953f988153c8629926d22a6a5f69b14e
+        // 部署交易有一旦挖出，合约地址就可用
+        // 参考: https://ropsten.etherscan.io/address/0x2bd9aaa2953f988153c8629926d22a6a5f69b14e
         console.log(contract.address);
         // "0x2bD9aAa2953F988153c8629926D22A6a5F69b14E"
 
-        // The transaction that was sent to the network to deploy the Contract
-        // See: https://ropsten.etherscan.io/tx/0x159b76843662a15bd67e482dcfbee55e8e44efad26c5a614245e12a00d4b1a51
+        // 发送到网络用来部署合约的交易
+        // 查看: https://ropsten.etherscan.io/tx/0x159b76843662a15bd67e482dcfbee55e8e44efad26c5a614245e12a00d4b1a51
         console.log(contract.deployTransaction.hash);
         // "0x159b76843662a15bd67e482dcfbee55e8e44efad26c5a614245e12a00d4b1a51"
 
-        // The contract is NOT deployed yet; we must wait until it is mined
+        //合约还没有部署;我们必须等到它被挖出
         await contract.deployed()
 
-        // Done! The contract is deployed.
+        // 好了 合约已部署。
     })();
 
 
@@ -219,6 +210,8 @@ Prototype属性
 连接已有合约
 =================================
 
+一旦合约被部署，就可以连接它，使用 **Contract** 对象。
+
 Once a Contract has been deployed, it can be connected to using
 the **Contract** object.
 
@@ -226,14 +219,14 @@ the **Contract** object.
 ------------------------
 
 new :sup:`ethers` . Contract ( addressOrName , abi , providerOrSigner )
-    Connects to the contract at *addressOrName* defined by *abi*, connected as *providerOrSigner*.
+    通过 **abi** 及 **addressOrName** 连接合约，连接作为 **providerOrSigner**。
 
-    For supported formats for *abi*, see :ref:`Contract ABI <contract-abi>`.
+    有关 **abi** 支持的格式，请参阅 :ref:`合约 ABI <contract-abi>` 。
 
-    For access capabilities and restrictions, see :ref:`Providers vs Signers <providers-vs-signers>`
+    有关访问能力和限制，请参阅 :ref:`提供者与签名器 <providers-vs-signers>`
 
 .. code-block:: javascript
-    :caption: *Connecting to an existing Contract*
+    :caption: *连接已有合约*
 
     const ethers = require('ethers');
 
@@ -248,57 +241,55 @@ new :sup:`ethers` . Contract ( addressOrName , abi , providerOrSigner )
     // Connect to the network
     let provider = ethers.getDefaultProvider();
 
-    // The address from the above deployment example
+    // 地址来自上面部署的合约
     let contractAddress = "0x2bD9aAa2953F988153c8629926D22A6a5F69b14E";
 
-    // We connect to the Contract using a Provider, so we will only
-    // have read-only access to the Contract
+    // 使用Provider 连接合约，将只有对合约的可读权限
     let contract = new ethers.Contract(contractAddress, abi, provider);
 
 
 .. code-block:: javascript
-    :caption: *Calling a read-only Constant Method*
+    :caption: *调用只读的视图方法*
 
-    // Get the current value
+    // 获取当前的值
     let currentValue = await contract.getValue();
 
     console.log(currentValue);
     // "Hello World"
 
 .. code-block:: javascript
-    :caption: *Calling a Non-Constant Method*
+    :caption: *调用非视图方法方法*
 
-    // A Signer from a private key
+    // 从私钥获取一个签名器 Signer 
     let privateKey = '0x0123456789012345678901234567890123456789012345678901234567890123';
     let wallet = new ethers.Wallet(privateKey, provider);
 
-    // Create a new instance of the Contract with a Signer, which allows
-    // update methods
+    // 使用签名器创建一个新的合约实例，它允许使用可更新状态的方法
     let contractWithSigner = contract.connect(wallet);
-    // ... OR ...
+    // ... 或 ...
     // let contractWithSigner = new Contract(contractAddress, abi, wallet)
 
-    // Set a new Value, which returns the transaction
+    // 设置一个新值，返回交易
     let tx = await contractWithSigner.setValue("I like turtles.");
 
-    // See: https://ropsten.etherscan.io/tx/0xaf0068dcf728afa5accd02172867627da4e6f946dfb8174a7be31f01b11d5364
+    // 查看: https://ropsten.etherscan.io/tx/0xaf0068dcf728afa5accd02172867627da4e6f946dfb8174a7be31f01b11d5364
     console.log(tx.hash);
     // "0xaf0068dcf728afa5accd02172867627da4e6f946dfb8174a7be31f01b11d5364"
 
-    // The operation is NOT complete yet; we must wait until it is mined
+    // 操作还没完成，需要等待挖矿
     await tx.wait();
 
-    // Call the Contract's getValue() method again
+    // 再次调用合约的 getValue()
     let newValue = await contract.getValue();
 
     console.log(currentValue);
     // "I like turtles."
 
 .. code-block:: javascript
-    :caption: *Listening to Events*
+    :caption: *监听事件Event*
 
     contract.on("ValueChanged", (author, oldValue, newValue, event) => {
-        // Called when anyone changes the value
+        // 在值变化的时候被调用
 
         console.log(author);
         // "0x14791697260E4c9A71f18484C9f997B308e59325"
@@ -309,39 +300,36 @@ new :sup:`ethers` . Contract ( addressOrName , abi , providerOrSigner )
         console.log(newValue);
         // "Ilike turtles."
 
-        // See Event Emitter below for all properties on Event
+        // 查看后面的事件触发器  Event Emitter 了解事件对象的属性
         console.log(event.blockNumber);
         // 4115004
     });
 
 .. code-block:: javascript
-    :caption: *Filtering an Events*
+    :caption: *过滤事件Events*
 
-    // A filter that matches my Signer as the author
+    // 使用签名器地址作为事件触发者进行过滤
     let filter = contract.filters.ValueChanged(wallet.address);
 
     contract.on(filter, (author, oldValue, newValue, event) => {
-        // Called ONLY when your account changes the value
+        // 只有当我们的账号（签名器地址）更改的数据才回调
     });
 
 -----
 
-Prototype属性
+Prototype 属性
 ---------------
 
 :sup:`prototype` . address
-    The address (or ENS name) of the contract.
+    返回合约地址或 ENS 名称。
 
 :sup:`prototype` . deployTransaction
-    If the contract was deployed by a ContractFactory, this is the transaction
-    used to deploy it, otherwise it is null.
+    如果合约通过ContractFactory部署，返回部署的交易，否则为null 。
 
 :sup:`prototype` . interface
-    The :ref:`Interface <api-interface>` meta-class of the parsed
-    ABI. Generally, this should not need to be accessed directly.
+    解析的ABI的 :ref:`接口 <api-interface>` 元类，通常不需要直接访问。
 
-Additional properties will be added to the prototype at run-time, based on
-the ABI provided, see :ref:`Contract Meta-Class <contract-metaclass>`.
+根据提供的ABI，附加属性将在运行时添加到原型 Prototype 中，请参阅:ref:`合约元类 Meta-Class <contract-metaclass>` 。
 
 -----
 
@@ -349,19 +337,15 @@ the ABI provided, see :ref:`Contract Meta-Class <contract-metaclass>`.
 ----------------------
 
 :sup:`prototype` . deployed ( ) |nbsp| :sup:`=>` |nbsp| :sup:`Promise<Contract>`
-    If the contract is the result of ``deploy()``, returns
-    a :ref:`Promise <promise>` that resolves to the contract once it
-    has been mined, or rejects if the contract failed to deploy. If the
-    contract has been deployed already, this will return a
-    :ref:`Promise <promise>` that resolves once the on-chain code has
-    been confirmed.
+    如果该合约是通过 ``deploy()`` 产生，则返回一个 :ref:`Promise <promise>` ，一旦部署被挖掘，从 :ref:`Promise <promise>` 可以获得该合约，如果该合约未能部署，则无法获取。
+    如果是已经部署的合约，一旦链上的代码被确认，:ref:`Promise <promise>` 就会resolve 。
 
 -----
 
 .. _contract-metaclass:
 
-Meta-Class 属性
-=====================
+元类 Meta-Class 属性
+=========================
 
 Since a Contract is dynamic and loaded at run-time, many of the properties
 that will exist on a Contract are determined at run-time from
@@ -483,8 +467,8 @@ transaction (or call) overrides.
 
 .. _contract-event-emitter:
 
-Event Emitter
-=============
+事件触发器Event Emitter
+=========================
 
 Each Contract supports many of the operations available from the `Event Emitter API`_.
 
