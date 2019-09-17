@@ -19,7 +19,7 @@ ethers.js库旨在为以太坊区块链及其生态系统提供一个小而完�
     译者注：ethers.js 对比使用 web3.js 代码量更少，接口也更简洁，推荐优先使用 ethers.js 。
 
 .. note::
-    译者注：Tiny熊 `用 ethers.js 开发了网页钱包`_ ，是一个很好的学习案例。 
+    译者注：Tiny熊 `用 ethers.js 开发了网页钱包`_ ，是一个很好的学习案例。
 
 包含功能
 ==========
@@ -32,7 +32,7 @@ ethers.js库旨在为以太坊区块链及其生态系统提供一个小而完�
     -  **ENS名称** 是“一等公民”；它们可以在任何可以使用以太坊地址的地方使用
     -  库 **非常小** （压缩~88kb;未压缩284kb）
     -  功能 **完整** ，满足所有的以太坊相关需求
-    - 文档全面： `中文文档`_  及 `documentation`_ 
+    - 文档全面： `中文文档`_  及 `documentation`_
     - 大量维护和添加的 **测试用例**
     - 完全支持 **TypeScript** 准备好，有定义文件和完整的TypeScript源文件
     -  宽松的 **MIT 协议许可** （包括所有依赖）; 完全开源可以随意使用
@@ -55,7 +55,7 @@ ethers.js库旨在为以太坊区块链及其生态系统提供一个小而完�
 .. _INFURA: https://infura.io/
 .. _Etherscan: https://etherscan.io/
 .. _MetaMask: https://metamask.io/
-.. _中文文档: https://docs.ethers.io
+.. _中文文档: https://learnblockchain.cn/docs/ethers.js/
 .. _documentation: https://docs.ethers.io
 .. _用 ethers.js 开发了网页钱包: https://learnblockchain.cn/2019/04/11/wallet-dev-guide/#ethers.js
 
