@@ -3,8 +3,8 @@
 
 .. _api-wallet:
 
-在使用接口之前，需要先确保正确 `引入了 ethers.js <getting-started>`_ 。
- 
+在使用接口之前，需要先确保正确 引入了 :ref:`ethers.js <getting-started.html>`_ 。
+
 
 钱包类 Wallet 和 签名器 Signer
 **************************************
@@ -25,7 +25,7 @@ Wallet
 ----------------------
 
 new :sup:`Wallet` ( privateKey [ , provider ] )
-    从参数 *privateKey* 私钥创建一个钱包实例， 还可以提供一个可选的 |provider| 参数用于连接节点。 
+    从参数 *privateKey* 私钥创建一个钱包实例， 还可以提供一个可选的 |provider| 参数用于连接节点。
 
 :sup:`Wallet` . createRandom ( [ options ] ) |nbsp| :sup:`=>` |nbsp| :sup:`Wallet`
     创建一个随机钱包实例。 确保钱包（私钥）存放在安全的位置，如果丢失了就**没有办法找回钱包**。
@@ -61,7 +61,7 @@ new :sup:`Wallet` ( privateKey [ , provider ] )
 .. _wallet-connect:
 
 :sup:`prototype` . connect ( provider ) |nbsp| :sup:`=>` |nbsp| :sup:`Wallet`
-    从已有实例创建新的Wallet实例，并连接到新 |provider| 
+    从已有实例创建新的Wallet实例，并连接到新 |provider|
 
 |
 
@@ -155,7 +155,7 @@ Prototype 属性
     如果没有连接提供者，则返回null。
 
     要更改 |provider| ，请使用 :ref:`connect <wallet-connect>` 方法，该方法将返回连接到新的 |provider| 的钱包 **实例** 。
-    
+
 
 :sup:`prototype` . mnemonic
    返回钱包的助记词，如果没有助记词，则为null。
@@ -310,7 +310,7 @@ Prototype 属性
 .. _sendTransaction:
 
 :sup:`prototype` . sendTransaction ( transaction ) |nbsp| :sup:`=>` |nbsp| :sup:`Promise<TransactionResponse>`
-    发送 *交易* (参考 :ref:`Transaction Requests <transaction-request>`) 到网络，返回一个 可以获取  :ref:`Transaction Response <transaction-response>` 的 :ref:`Promise <promise>` 
+    发送 *交易* (参考 :ref:`Transaction Requests <transaction-request>`) 到网络，返回一个 可以获取  :ref:`Transaction Response <transaction-response>` 的 :ref:`Promise <promise>`
     任何没有提供的属性将从网络获取填充。
 
 .. code-block:: javascript
@@ -378,7 +378,7 @@ Prototype 属性
 
 .. note::
 
-    关于加密的JSON钱包文件（keystore），可参考阅读 ` 钱包开发之 - 账号 Keystore 文件导入导出 <https://learnblockchain.cn/2018/10/25/eth-web-wallet_2/>`_ 。
+    关于加密的JSON钱包文件（keystore），可参考阅读 :ref:`钱包开发之 - 账号 Keystore 文件导入导出 <https://learnblockchain.cn/2018/10/25/eth-web-wallet_2/>`_ 。
 
 
 从JSON钱包文件（keystore）创建 Wallet 对象，  参考 :ref:`Wallet.fromEncryptedJson <fromEncryptedJson>` 。
@@ -390,7 +390,7 @@ Prototype 属性
 
         - **salt** --- scrypt （一个秘钥衍生算法） 的盐
         - **iv** --- aes-ctr-128 需要使用的初始化矢量
-        - **uuid** --- 钱包要用的 UUID 
+        - **uuid** --- 钱包要用的 UUID
         - **scrypt** --- scrypt 算法的参数 (N, r 及 p)
         - **entropy** --- 通常不指定，钱包的助记词熵;
         - **mnemonic** --- 通常不指定，钱包的助记词
@@ -438,7 +438,7 @@ Signer API 是一个抽象类，当需要 |signer| 时就可以扩展实现它�
     如果参数 *message* 是字符串, 它被转换为UTF-8字节，否则使用数据用 :ref:`Arrayish <arrayish>` 表示的二进制。
 
 :sup:`object` . sendTransaction ( transaction ) |nbsp| :sup:`=>` |nbsp| :sup:`Promise<TransactionResponse>`
-    发送 *交易transaction* (参考 :ref:`Transaction Requests <transaction-request>`) 到网络，返回一个 可以获取  :ref:`Transaction Response <transaction-response>` 的 :ref:`Promise <promise>` 
+    发送 *交易transaction* (参考 :ref:`Transaction Requests <transaction-request>`) 到网络，返回一个 可以获取  :ref:`Transaction Response <transaction-response>` 的 :ref:`Promise <promise>`
     任何没有提供的属性将从网络获取填充。
 
 -----
