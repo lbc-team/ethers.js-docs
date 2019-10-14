@@ -3,7 +3,7 @@
 
 .. _api-wallet:
 
-在使用接口之前，需要先确保正确 引入了 :ref:`ethers.js <getting-started.html>`_ 。
+在使用接口之前，需要先确保正确 引入了 `ethers.js <getting-started.html>`_ 。
 
 
 钱包类 Wallet 和 签名器 Signer
@@ -378,7 +378,7 @@ Prototype 属性
 
 .. note::
 
-    关于加密的JSON钱包文件（keystore），可参考阅读 :ref:`钱包开发之 - 账号 Keystore 文件导入导出 <https://learnblockchain.cn/2018/10/25/eth-web-wallet_2/>`_ 。
+    关于加密的JSON钱包文件（keystore），可参考阅读 `钱包开发之 - 账号 Keystore 文件导入导出 <https://learnblockchain.cn/2018/10/25/eth-web-wallet_2/>`_ 。
 
 
 从JSON钱包文件（keystore）创建 Wallet 对象，  参考 :ref:`Wallet.fromEncryptedJson <fromEncryptedJson>` 。
