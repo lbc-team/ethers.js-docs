@@ -312,7 +312,7 @@ Hash 方法
     // '0xdf7e70e5021544f4834bbee64a9e3789febc4be81470df629cad6ddb03320a5c'
 
 
-Hash 帮助方法 
+Hash 帮助方法
 ---------------------
 
 :sup:`utils` . hashMessage ( stringOrArrayish ) |nbsp| :sup:`=>` |nbsp| :sup:`hex`
@@ -409,46 +409,41 @@ the result of the hash functions as would be performed by Solidity.
 -----
 
 
-|Ether| 单位及转换
+以太币格式化与转换
 =====================
 
 :sup:`utils` . etherSymbol
-    The ethereum symbol (the Greek letter *Xi* )
+    以太坊符号(希腊字母 *Xi* )
 
 .. _parseEther:
 
 :sup:`utils` . parseEther ( etherString ) |nbsp| :sup:`=>` |nbsp| :sup:`BigNumber`
-    Parse the *etherString* representation of ether into a BigNumber instance
-    of the amount of wei.
-
+    将代表 ether 单位数的 *etherString* 解析为 wei 单位数的 BitNumber 实例。
+    （译者注：ether、gwei、wei 等是以太坊的货币单位名称，下同。）
 .. _formatEther:
 
 :sup:`utils` . formatEther ( wei ) |nbsp| :sup:`=>` |nbsp| :sup:`string`
-    Format an amount of *wei* into a decimal string representing the amount of ether.
-    The output will always include at least one whole number and at least one decimal
-    place, otherwise leading and trailing 0's will be trimmed.
+    将代表 wei 单位数的 *wei* 格式化为代表 ether 单位数的十进制字符串。
+    输出值总是包含至少一个整数和一个小数位，否则将剪除前导和尾随的 0。
 
 .. _parseUnits:
 
 :sup:`utils` . parseUnits ( valueString , decimalsOrUnitName ) |nbsp| :sup:`=>` |nbsp| :sup:`BigNumber`
-    Parse the *valueString* representation of units into a BigNumber instance
-    of the amount of wei. The *decimalsOrUnitsName* may be a number of decimals between
-    3 and 18 (multiple of 3) or a name, such as `gwei`.
+    将代表某单位数的 *valueString* 解析为一个代表 wei 单位数的 BigNumber 实例。
+    参数 *decimalsOrUnitsName* 可以是 3 到 18 之间（3 的倍数）的小数位数，
+    或者是以太币单位名称，如：`gwei`。
 
 .. _formatUnits:
 
 :sup:`utils` . formatUnits ( wei , decimalsOrUnitName ) |nbsp| :sup:`=>` |nbsp| :sup:`string`
-    Format an amount of *wei* into a decimal string representing the amount of units. 
-    The output will always include at least one whole number and at least one decimal place,
-    otherwise leading and trailing 0's will be trimmed. The *decimalsOrUnitsName*
-    may be a number of decimals between 3 and 18 (multiple of 3) or a name, such as `gwei`.
+    将 *wei* 单位数格式化为一个代表某单位数的十进制字符串。
+    输出值总是包含至少一个整数和一个小数位，否则将修剪前导和尾随的 0。
+    参数 *decimalsOrUnitsName* 可以是 3 到 18 之间（3 的倍数）的小数位数，
+    或者是单位名称，如：`gwei`。
 
 :sup:`utils` . commify ( numberOrString ) |nbsp| :sup:`=>` |nbsp| :sup:`string`
-    Returns *numberOrString* with commas placed at every third position within the whole
-    component. If *numberOrString* contains a decimal point, the output will as well with
-    at least one digit for both the whole and decimal components. If there no decimal,
-    then the output will also not contain a decimal.
-
+    返回含有千分符的*numberOrString*。如果 *numberOrString* 包含小数点，
+    则输出值将至少具有一位整数和小数。如果不包含小数点，则输出值不会包含小数。
 
 .. code-block:: javascript
     :caption: *examples*
