@@ -1,13 +1,14 @@
-ethers.js 翻译及说明
+ethers.js v4 翻译及说明
 **************************
 
 翻译说明
 ==========
 
-本文档基于当前最新 `官方文档 <https://docs.ethers.io/ethers.js/html/>`_ 由 `深入浅出区块链  <https://learnblockchain.cn/>`_ 社区成员翻译、整理、校队，我们虽力求准确，但如您发现纰漏，欢迎到 `GitHub 提Issues  <https://github.com/lbc-team/ethers.js-docs>`_ 指正。
+本文档基于 `官方文档 v4 版本 <https://docs.ethers.org/v4/>`_ 翻译， 最新的 v5 版本的翻译请前往 `ethers.js 中文文档 v5 <https://learnblockchain.cn/ethers_v5/>`_ 。
 
-尊重汗水，需转载请联系微信：xlbxiong 获取授权。
+由 `登链社区 <https://learnblockchain.cn/>`_ 成员翻译、整理、校队，尊重汗水，需转载请联系微信：xlbxiong 获取授权。
 
+最近的的
 
 ethers.js 介绍
 ====================
@@ -55,7 +56,7 @@ ethers.js库旨在为以太坊区块链及其生态系统提供一个小而完�
 .. _INFURA: https://infura.io/
 .. _Etherscan: https://etherscan.io/
 .. _MetaMask: https://metamask.io/
-.. _中文文档: https://learnblockchain.cn/docs/ethers.js/
+.. _中文文档: https://learnblockchain.cn/ethers_v5/
 .. _documentation: https://docs.ethers.io
 .. _用 ethers.js 开发了网页钱包: https://learnblockchain.cn/2019/04/11/wallet-dev-guide/#ethers.js
 

@@ -394,8 +394,8 @@ complexity and size of your code should be reduced.
 
 -----
 
-获取网络Network方法变更
-----------------------
+获取网络Network变更方法
+------------------------
 
 .. code-block:: javascript
     :caption: *Getting Network Info - ethers v3*
@@ -438,7 +438,7 @@ in the utilities, along with a general serialization API.
 -----
 
 定制 |signer| 方法变更
-------------------------
+--------------------------
 
 .. code-block:: javascript
     :caption: *Custome Signer --- ethers v3*
